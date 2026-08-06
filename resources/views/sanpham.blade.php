@@ -233,6 +233,88 @@
         color: #000;
     }
 
+    /* CHỌN SIZE + THÊM GIỎ HÀNG */
+    .cart-form {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .size-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        color-scheme: dark;
+        flex: 0 0 100px;
+        background-color: #0f0f0f;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23d4af37' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        border: 1.5px solid #3a3a3a;
+        color: #ccc;
+        border-radius: 8px;
+        padding: 0 28px 0 14px;
+        height: 40px;
+        font-size: 0.82rem;
+        font-weight: 500;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.25s ease;
+    }
+
+    .size-select:hover {
+        border-color: #d4af37;
+        color: #d4af37;
+        background-color: #0f0f0f;
+    }
+
+    .size-select:focus,
+    .size-select:focus-visible {
+        border-color: #d4af37;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+        background-color: #0f0f0f;
+    }
+
+    .size-select option {
+        background-color: #1a1a1a;
+        color: #f0f0f0;
+    }
+
+    .size-select:focus {
+        border-color: #d4af37;
+    }
+
+    .btn-add-cart {
+        flex: 1;
+        background: linear-gradient(135deg, #d4af37, #c19b2f);
+        border: none;
+        color: #000;
+        height: 40px;
+        padding: 0 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
+
+    .btn-add-cart:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(212, 175, 55, 0.45);
+        filter: brightness(1.08);
+    }
+
+    .btn-add-cart:active {
+        transform: translateY(0);
+    }
+
     .empty-state {
         text-align: center;
         padding: 80px 20px;
@@ -270,10 +352,43 @@
     .sidebar-link:hover {
         color: #d4af37 !important;
     }
+
+    /* THÔNG BÁO THÊM GIỎ HÀNG */
+    .toast-success {
+        position: fixed;
+        top: 90px;
+        right: 20px;
+        z-index: 1080;
+        background: rgba(40, 167, 69, 0.15);
+        border: 1px solid #28a745;
+        color: #75d98b;
+        padding: 14px 22px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.9rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        animation: fadeOut 0.4s ease 2.6s forwards;
+    }
+
+    @keyframes fadeOut {
+        to {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+    }
 </style>
 
 {{-- THANH TÌM KIẾM --}}
 <div style="background:#0a0a0a; padding: 20px 0; border-bottom: 1px solid #222;">
+
+    @if(session('success'))
+    <div class="toast-success">
+        <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
+    </div>
+    @endif
+
     <div class="container">
         <form method="GET" action="{{ url('/san-pham') }}" class="d-flex gap-2 justify-content-center">
             {{-- Giữ filter danh mục nếu đang lọc --}}
@@ -381,6 +496,22 @@
                                 <i class="bi bi-info-circle-fill"></i> Chi Tiết
                             </a>
                         </div>
+
+                        <form action="{{ route('giohang.add') }}" method="GET" class="cart-form">
+                            <input type="hidden" name="id" value="{{ $sp->id }}">
+                            <input type="hidden" name="url" value="{{ url()->full() }}">
+                            <select name="size" class="size-select" required>
+                                <option value="" selected disabled>Chọn size</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                            <button type="submit" class="btn-add-cart">
+                                <i class="bi bi-cart-plus-fill"></i> Thêm Giỏ
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

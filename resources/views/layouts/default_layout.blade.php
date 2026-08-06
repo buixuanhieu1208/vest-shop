@@ -54,26 +54,45 @@
         .navbar {
             background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
             border-bottom: 2px solid #d4af37;
-            padding: 14px 0;
+            padding: 12px 0;
             box-shadow: 0 2px 15px rgba(212, 175, 55, 0.15);
         }
 
         .navbar .container-fluid {
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            row-gap: 12px;
+            flex-wrap: nowrap;
+            gap: 18px;
+        }
+
+        /* Khối chứa nav + actions (Bootstrap collapse) luôn cùng hàng với logo */
+        #navbarNav {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-between;
+            flex: 1 1 auto;
+            min-width: 0;
+            gap: 14px;
         }
 
         .navbar-brand {
             font-family: 'Playfair Display', serif;
-            font-size: 1.7rem;
+            font-size: 1.45rem;
             color: #d4af37 !important;
-            letter-spacing: 2.5px;
+            letter-spacing: 1.8px;
             font-weight: 700;
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
             transition: all 0.3s;
             white-space: nowrap;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar-brand i {
+            font-size: 1.25rem;
         }
 
         .navbar-brand:hover {
@@ -83,29 +102,30 @@
 
         .navbar-nav {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             align-items: center;
-            gap: 4px;
-            margin: 0 auto;
+            gap: 2px;
+            flex-shrink: 1;
+            min-width: 0;
         }
 
         .nav-link-main {
             color: #d0d0d0 !important;
             font-weight: 500;
-            font-size: 0.88rem;
-            padding: 9px 16px !important;
-            border-radius: 25px;
+            font-size: 0.78rem;
+            padding: 7px 11px !important;
+            border-radius: 20px;
             transition: all 0.25s ease;
             white-space: nowrap;
             text-decoration: none !important;
             display: inline-flex;
             align-items: center;
-            gap: 7px;
+            gap: 5px;
             line-height: 1.2;
         }
 
         .nav-link-main i {
-            font-size: 0.95rem;
+            font-size: 0.86rem;
         }
 
         .nav-link-main:hover,
@@ -115,7 +135,7 @@
         }
 
         .navbar-nav .dropdown-toggle::after {
-            margin-left: 4px;
+            margin-left: 3px;
             vertical-align: 0.15em;
             transition: transform 0.25s ease;
         }
@@ -149,7 +169,7 @@
             visibility: hidden;
             pointer-events: none;
             transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-            min-width: 240px;
+            min-width: 220px;
         }
 
         .dropdown-hover:hover .dropdown-menu {
@@ -170,17 +190,18 @@
         .dropdown-item {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             color: #c0c0c0;
-            padding: 10px 14px;
-            font-size: 0.87rem;
+            padding: 9px 13px;
+            font-size: 0.83rem;
             border-radius: 6px;
             transition: background-color 0.18s ease, color 0.18s ease;
+            white-space: nowrap;
         }
 
         .dropdown-item i {
-            font-size: 0.95rem;
-            width: 16px;
+            font-size: 0.9rem;
+            width: 15px;
             text-align: center;
             color: #d4af37;
             flex-shrink: 0;
@@ -196,9 +217,9 @@
         .navbar-actions {
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-left: auto;
+            gap: 8px;
+            flex-wrap: nowrap;
+            flex-shrink: 0;
         }
 
         /* BUTTONS */
@@ -206,15 +227,15 @@
             color: #d4af37 !important;
             border: 1.5px solid #d4af37 !important;
             background: transparent;
-            border-radius: 25px;
-            font-size: 0.85rem;
+            border-radius: 20px;
+            font-size: 0.76rem;
             font-weight: 600;
-            padding: 8px 18px;
+            padding: 6px 13px;
             transition: all 0.25s;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
             display: inline-flex;
             align-items: center;
-            gap: 7px;
+            gap: 5px;
             text-decoration: none;
             white-space: nowrap;
         }
@@ -226,18 +247,32 @@
             box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* USER INFO */
+        /* USER INFO — avatar tròn viết tắt chữ cái đầu, gọn hơn nhiều so với hiện tên đầy đủ */
         .user-info {
             display: flex;
             align-items: center;
             gap: 8px;
             color: #c0c0c0;
-            font-size: 0.85rem;
-            padding: 7px 14px;
+            font-size: 0.78rem;
+            padding: 4px 12px 4px 4px;
             background: rgba(42, 42, 42, 0.5);
-            border-radius: 25px;
+            border-radius: 20px;
             border: 1px solid #333;
             white-space: nowrap;
+        }
+
+        .user-info-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37, #a08045);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.72rem;
+            flex-shrink: 0;
         }
 
         .user-info strong {
@@ -263,14 +298,31 @@
         }
 
         @media (max-width: 991.98px) {
+            #navbarNav {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+
             .navbar-nav {
+                flex-wrap: wrap;
+                flex-shrink: 1;
                 margin: 8px 0;
                 width: 100%;
+                justify-content: flex-start;
+            }
+
+            .nav-link-main {
+                font-size: 0.88rem;
+                padding: 9px 16px !important;
+            }
+
+            .nav-link-main i {
+                font-size: 0.95rem;
             }
 
             .navbar-actions {
                 width: 100%;
-                margin-left: 0;
+                flex-wrap: wrap;
             }
 
             /* Trên mobile: navbar collapse theo chiều dọc nên dropdown hiển thị tĩnh, không dùng hover */
@@ -480,11 +532,11 @@
                     @endif
                 </ul>
 
-                <div class="d-flex align-items-center gap-3 ms-auto">
+                <div class="d-flex align-items-center gap-2 navbar-actions">
                     @if(Auth::check())
                     <div class="user-info">
-                        <i class="bi bi-person-circle"></i>
-                        <span>Xin chào, <strong>{{ Auth::user()->name }}</strong></span>
+                        <span class="user-info-avatar">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                        <strong>{{ Auth::user()->name }}</strong>
                     </div>
                     <a href="{{ url('/dang-xuat') }}" class="btn-action-gold">
                         <i class="bi bi-box-arrow-right"></i> Đăng xuất
@@ -495,7 +547,7 @@
                     </a>
                     @endif
 
-                    @if(Auth::check() && Auth::user()->quyen != 'Admin')
+                    @if(Auth::check())
                     <a href="{{ url('/gio-hang') }}" class="btn-action-gold cart-badge">
                         <i class="bi bi-cart3"></i> Giỏ hàng
                         @php $soLuongGioHang = collect(session('gio_hang_' . Auth::id(), []))->sum('so_luong'); @endphp

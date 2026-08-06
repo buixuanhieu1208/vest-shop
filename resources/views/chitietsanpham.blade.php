@@ -510,6 +510,18 @@
     </div>
 </div>
 
+{{-- BẮT ĐẦU: PHẦN ĐÁNH GIÁ SẢN PHẨM --}}
+<div class="container mt-5">
+    <h3 style="color: #C5A059; font-family: 'Playfair Display', serif; margin-bottom: 20px;">
+        Đánh Giá Sản Phẩm
+    </h3>
+    <div style="background: #1a1a1a; border: 1px solid #333; border-radius: 15px; padding: 30px;">
+        {{-- Nhúng file và ép biến $sanPham của controller thành biến $sp cho partial --}}
+        @include('Danhgia partial', ['sp' => $sanPham])
+    </div>
+</div>
+{{-- KẾT THÚC: PHẦN ĐÁNH GIÁ SẢN PHẨM --}}
+
 {{-- SẢN PHẨM LIÊN QUAN --}}
 <div class="related-products">
     <div class="container">

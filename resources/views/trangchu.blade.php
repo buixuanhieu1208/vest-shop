@@ -555,7 +555,7 @@
                         </div>
                         @endif
                         <div class="product-overlay">
-                            <a href="{{ url('/san-pham') }}" class="btn-view">
+                            <a href="{{ url('/san-pham/' . $sp->id) }}" class="btn-view">
                                 <i class="bi bi-eye"></i> Xem Chi Tiết
                             </a>
                         </div>
@@ -563,7 +563,7 @@
                     <div class="product-info">
                         <h5 class="product-name">{{ $sp->ten_sp }}</h5>
                         <p class="product-price">{{ number_format($sp->gia, 0, ',', '.') }} đ</p>
-                        <a href="{{ url('/san-pham') }}" class="btn-view text-center mt-auto">
+                        <a href="{{ url('/san-pham/' . $sp->id) }}" class="btn-view text-center mt-auto">
                             <i class="bi bi-cart-plus"></i> Xem Thêm
                         </a>
                     </div>

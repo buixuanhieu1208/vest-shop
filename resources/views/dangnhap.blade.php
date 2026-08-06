@@ -199,7 +199,7 @@
                 </div>
 
                 <button type="submit" class="btn-gold mb-4">
-                    <i class="bi bi-box-arrow-in-right me-2"></i> Đăng Nhập
+                     Đăng Nhập
                 </button>
 
                 <div class="auth-divider">hoặc</div>

@@ -193,7 +193,7 @@
                 </div>
 
                 <button type="submit" class="btn-gold mb-4">
-                    <i class="bi bi-person-check me-2"></i> Tạo Tài Khoản
+                     Tạo Tài Khoản
                 </button>
 
                 <div class="auth-divider">hoặc</div>

@@ -84,4 +84,34 @@ class GioHangController extends Controller
         session()->forget($this->sessionKey());
         return redirect()->route('sanpham.index');
     }
+
+    public function thanhToan()
+    {
+        $gioHang = session('gio_hang_' . auth()->id(), []);
+        
+        if (empty($gioHang)) {
+            return redirect()->route('sanpham.index')->with('error', 'Giỏ hàng của bạn đang trống.');
+        }
+
+        $tongTien = collect($gioHang)->sum(function($item) {
+            return $item['gia'] * $item['so_luong'];
+        });
+
+        return view('thanhtoan', compact('gioHang', 'tongTien'));
+    }
+
+    public function xuLyThanhToan(Request $request)
+    {
+        $request->validate([
+            'ho_ten' => 'required|string|max:255',
+            'so_dien_thoai' => 'required|string|max:20',
+            'dia_chi' => 'required|string|max:500',
+            'phuong_thuc' => 'required|in:cod,bank',
+            'ghi_chu' => 'nullable|string'
+        ]);
+
+        session()->forget('gio_hang_' . auth()->id());
+
+        return redirect()->route('trangchu')->with('success', 'Đặt hàng thành công! Chúng tôi sẽ liên hệ để xác nhận đơn hàng của bạn trong thời gian sớm nhất.');
+    }
 }

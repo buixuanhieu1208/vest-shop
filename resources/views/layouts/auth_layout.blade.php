@@ -214,7 +214,7 @@
     {{-- NAVBAR --}}
     <nav class="navbar">
         <div class="container justify-content-center">
-            <a class="navbar-brand" href="{{ url('/dang-nhap') }}">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 <i class="bi bi-gem"></i> KINGSMAN
             </a>
         </div>

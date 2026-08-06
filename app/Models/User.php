@@ -15,8 +15,10 @@ class User extends Authenticatable
         'email',
         'password',
         'quyen',
+        'trang_thai',
         'phone',
-        'address'
+        'address',
+        'avatar',
     ];
 
     protected $hidden = [
@@ -30,5 +32,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isKhoa(): bool
+    {
+        return $this->trang_thai === 'Đã khóa';
+    }
+
+    // Đánh giá mà user này đã viết
+    public function danhGia()
+    {
+        return $this->hasMany(DanhGia::class, 'user_id');
+    }
+
+    // Link ảnh avatar - nếu chưa có avatar thì tự sinh ảnh chữ cái đầu tên (không cần file mặc định trên server)
+    public function getAvatarUrlAttribute(): string
+    {
+        if ($this->avatar) {
+            return asset('images/avatars/' . $this->avatar);
+        }
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=d4af37&color=000&bold=true';
     }
 }

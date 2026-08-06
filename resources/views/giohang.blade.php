@@ -5,7 +5,33 @@
 @section('content')
 <style>
     .cart-container {
-        padding: 40px 0;
+        padding: 50px 0 70px;
+        min-height: 60vh;
+    }
+
+    .cart-breadcrumb {
+        color: #777;
+        font-size: 0.82rem;
+        margin-bottom: 14px;
+    }
+
+    .cart-breadcrumb a {
+        color: #999;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .cart-breadcrumb a:hover {
+        color: #C5A059;
+    }
+
+    .cart-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 32px;
     }
 
     .cart-title {
@@ -13,111 +39,123 @@
         color: #C5A059;
         font-size: 2rem;
         font-weight: 700;
-        margin-bottom: 30px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        position: relative;
-        padding-bottom: 15px;
-    }
-
-    .cart-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 80px;
-        height: 3px;
-        background: linear-gradient(90deg, #C5A059, transparent);
-    }
-
-    .cart-table-wrapper {
-        background: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    }
-
-    .cart-table {
-        width: 100%;
+        letter-spacing: 1px;
         margin: 0;
-        color: #e0e0e0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 
-    .cart-table thead tr {
-        background: linear-gradient(135deg, #C5A059, #a08045);
-        color: #000;
+    .cart-count {
+        color: #888;
+        font-size: 0.9rem;
     }
 
-    .cart-table thead th {
-        padding: 15px 20px;
-        font-weight: 700;
-        font-size: 0.95rem;
-        letter-spacing: 0.5px;
-        border: none;
+    .cart-alert {
+        background: rgba(197, 160, 89, .12);
+        border: 1px solid #C5A059;
+        color: #C5A059;
+        border-radius: 12px;
+        padding: 13px 22px;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.92rem;
     }
 
-    .cart-table tbody tr {
-        border-bottom: 1px solid #2a2a2a;
-        transition: background 0.2s;
+    /* CART ITEM CARD */
+    .cart-items {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
     }
 
-    .cart-table tbody tr:hover {
-        background: rgba(197, 160, 89, 0.05);
+    .cart-item-card {
+        background: linear-gradient(135deg, #1a1a1a, #191919);
+        border: 1px solid #2c2c2c;
+        border-radius: 16px;
+        padding: 18px 22px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
     }
 
-    .cart-table tbody tr:last-child {
-        border-bottom: none;
+    .cart-item-card:hover {
+        border-color: #C5A059;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
     }
 
-    .cart-table tbody td {
-        padding: 18px 20px;
-        vertical-align: middle;
-        border: none;
-        color: #e0e0e0;
-    }
-
-    .product-img {
-        width: 70px;
-        height: 70px;
+    .cart-item-img {
+        width: 84px;
+        height: 84px;
         object-fit: cover;
-        border-radius: 10px;
-        border: 2px solid #333;
+        border-radius: 12px;
+        border: 1px solid #333;
+        flex-shrink: 0;
     }
 
-    .product-name {
+    .cart-item-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .cart-item-name {
         font-weight: 600;
-        color: #e0e0e0;
-        font-size: 0.95rem;
+        color: #f0f0f0;
+        font-size: 1rem;
+        margin-bottom: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .cart-item-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
     }
 
     .size-badge {
-        display: inline-block;
-        padding: 3px 10px;
-        background: rgba(197, 160, 89, 0.15);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 12px;
+        background: rgba(197, 160, 89, 0.12);
         border: 1px solid #C5A059;
         border-radius: 20px;
         color: #C5A059;
-        font-size: 0.8rem;
+        font-size: 0.76rem;
         font-weight: 600;
-        margin-top: 5px;
+    }
+
+    .unit-price {
+        color: #999;
+        font-size: 0.82rem;
     }
 
     .qty-control {
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 10px;
+        gap: 12px;
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 25px;
+        padding: 5px 8px;
+        flex-shrink: 0;
     }
 
     .qty-btn {
-        width: 32px;
-        height: 32px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
-        border: 2px solid #C5A059;
+        border: none;
         background: transparent;
         color: #C5A059;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         font-weight: 700;
         display: flex;
         align-items: center;
@@ -135,59 +173,71 @@
 
     .qty-num {
         font-weight: 700;
-        font-size: 1.1rem;
-        color: #e0e0e0;
-        min-width: 20px;
+        font-size: 0.95rem;
+        color: #f0f0f0;
+        min-width: 18px;
         text-align: center;
     }
 
-    .price-col {
+    .subtotal-col {
+        text-align: right;
+        min-width: 130px;
+        flex-shrink: 0;
+    }
+
+    .subtotal-label {
+        color: #777;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 3px;
+    }
+
+    .subtotal-price {
         color: #C5A059;
         font-weight: 700;
-        font-size: 1rem;
+        font-size: 1.08rem;
+        white-space: nowrap;
     }
 
     .remove-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
         border-radius: 50%;
-        border: 2px solid #ff4444;
-        color: #ff4444;
+        border: 1.5px solid #444;
+        color: #888;
         background: transparent;
         text-decoration: none;
         transition: all 0.2s;
-        font-size: 1rem;
+        font-size: 0.95rem;
+        flex-shrink: 0;
     }
 
     .remove-btn:hover {
         background: #ff4444;
+        border-color: #ff4444;
         color: #fff;
     }
 
-    .cart-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        border-top: 1px solid #2a2a2a;
-        background: #1a1a1a;
+    .cart-continue {
+        margin-top: 24px;
     }
 
     .btn-continue {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 10px 24px;
+        padding: 11px 26px;
         border-radius: 25px;
         border: 2px solid #C5A059;
         color: #C5A059;
         background: transparent;
         text-decoration: none;
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         transition: all 0.3s;
     }
 
@@ -198,11 +248,11 @@
 
     /* SUMMARY CARD */
     .summary-card {
-        background: #1a1a1a;
+        background: linear-gradient(150deg, #1a1a1a 0%, #161616 100%);
         border: 1px solid #333;
-        border-radius: 16px;
+        border-radius: 18px;
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
         position: sticky;
         top: 20px;
     }
@@ -210,50 +260,53 @@
     .summary-header {
         background: linear-gradient(135deg, #C5A059, #a08045);
         color: #000;
-        padding: 18px 25px;
+        padding: 20px 26px;
         font-family: 'Playfair Display', serif;
         font-weight: 700;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         letter-spacing: 1px;
-        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 9px;
     }
 
     .summary-body {
-        padding: 25px;
+        padding: 26px;
     }
 
     .summary-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 0;
-        border-bottom: 1px solid #2a2a2a;
-        color: #aaa;
-        font-size: 0.95rem;
-    }
-
-    .summary-row:last-of-type {
-        border-bottom: none;
+        padding: 11px 0;
+        color: #999;
+        font-size: 0.9rem;
     }
 
     .summary-row span:last-child {
-        font-weight: 700;
+        font-weight: 600;
         color: #e0e0e0;
+    }
+
+    .summary-divider {
+        border: none;
+        border-top: 1px dashed #333;
+        margin: 6px 0;
     }
 
     .summary-total {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        padding: 18px 0 0;
-        margin-top: 10px;
+        align-items: baseline;
+        padding: 18px 0 4px;
+        margin-top: 6px;
         border-top: 2px solid #C5A059;
     }
 
     .summary-total span:first-child {
         color: #C5A059;
         font-weight: 700;
-        font-size: 1.1rem;
+        font-size: 0.95rem;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
@@ -261,130 +314,171 @@
     .summary-total span:last-child {
         color: #C5A059;
         font-weight: 700;
-        font-size: 1.3rem;
+        font-size: 1.45rem;
+        font-family: 'Playfair Display', serif;
     }
 
     .btn-checkout {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
         width: 100%;
         padding: 15px;
-        margin-top: 20px;
+        margin-top: 22px;
         background: linear-gradient(135deg, #C5A059, #a08045);
         color: #000;
         border: none;
         border-radius: 50px;
         font-weight: 700;
-        font-size: 1rem;
-        letter-spacing: 1px;
+        font-size: 0.95rem;
+        letter-spacing: 0.6px;
         text-decoration: none;
         text-align: center;
         cursor: pointer;
         transition: all 0.3s;
-        box-shadow: 0 8px 25px rgba(197, 160, 89, 0.4);
+        box-shadow: 0 8px 25px rgba(197, 160, 89, 0.35);
     }
 
     .btn-checkout:hover {
         background: linear-gradient(135deg, #d4b36a, #C5A059);
         transform: translateY(-2px);
-        box-shadow: 0 12px 35px rgba(197, 160, 89, 0.6);
+        box-shadow: 0 12px 32px rgba(197, 160, 89, 0.55);
         color: #000;
     }
 
-    .empty-cart {
-        text-align: center;
-        padding: 80px 20px;
-        color: #555;
+    .summary-secure {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: #666;
+        font-size: 0.76rem;
+        margin-top: 16px;
     }
 
-    .empty-cart i {
-        font-size: 5rem;
-        color: #333;
-        margin-bottom: 20px;
-        display: block;
+    /* EMPTY CART */
+    .empty-cart {
+        text-align: center;
+        padding: 90px 20px;
+    }
+
+    .empty-cart-icon {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: rgba(197, 160, 89, 0.08);
+        border: 1px solid rgba(197, 160, 89, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+    }
+
+    .empty-cart-icon i {
+        font-size: 2.8rem;
+        color: #C5A059;
+        opacity: 0.7;
+    }
+
+    .empty-cart h4 {
+        color: #f0f0f0;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        margin-bottom: 10px;
     }
 
     .empty-cart p {
-        font-size: 1.2rem;
-        margin-bottom: 25px;
+        color: #777;
+        font-size: 0.95rem;
+        margin-bottom: 28px;
+    }
+
+    @media (max-width: 767px) {
+        .cart-item-card {
+            flex-wrap: wrap;
+        }
+
+        .subtotal-col {
+            text-align: left;
+            margin-left: auto;
+        }
     }
 </style>
 
 <div class="cart-container container">
-    <h2 class="cart-title"><i class="bi bi-cart3"></i> Giỏ Hàng</h2>
+
+    <div class="cart-breadcrumb">
+        <a href="{{ url('/') }}">Trang chủ</a> / <span style="color:#C5A059;">Giỏ hàng</span>
+    </div>
+
+    <div class="cart-header">
+        <h2 class="cart-title"><i class="bi bi-cart3"></i> Giỏ Hàng</h2>
+        @if(!empty($gioHang))
+        <span class="cart-count">{{ count($gioHang) }} sản phẩm trong giỏ</span>
+        @endif
+    </div>
 
     @if(session('success'))
-    <div class="alert" style="background:rgba(197,160,89,0.15); border:1px solid #C5A059; color:#C5A059; border-radius:10px; padding:12px 20px; margin-bottom:20px;">
-        <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+    <div class="cart-alert">
+        <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
     </div>
     @endif
 
     @if(empty($gioHang))
     <div class="empty-cart">
-        <i class="bi bi-cart-x"></i>
-        <p>Giỏ hàng của bạn đang trống.</p>
+        <div class="empty-cart-icon">
+            <i class="bi bi-cart-x"></i>
+        </div>
+        <h4>Giỏ hàng của bạn đang trống</h4>
+        <p>Hãy khám phá bộ sưu tập vest cao cấp của Kingsman.</p>
         <a href="{{ route('sanpham.index') }}" class="btn-continue">
             <i class="bi bi-arrow-left"></i> Tiếp tục mua sắm
         </a>
     </div>
     @else
     <div class="row g-4">
-        {{-- BẢNG GIỎ HÀNG --}}
+        {{-- DANH SÁCH SẢN PHẨM --}}
         <div class="col-lg-8">
-            <div class="cart-table-wrapper">
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th>Sản phẩm</th>
-                            <th class="text-center">Giá</th>
-                            <th class="text-center">Số lượng</th>
-                            <th class="text-end">Thành tiền</th>
-                            <th class="text-center">Xóa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($gioHang as $key => $item)
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center gap-3">
-                                    <img src="{{ asset('images/' . $item['hinh_anh']) }}"
-                                        class="product-img" alt="{{ $item['ten_sp'] }}" />
-                                    <div>
-                                        <div class="product-name">{{ $item['ten_sp'] }}</div>
-                                        <span class="size-badge">{{ $item['size'] }}</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center price-col">
-                                {{ number_format($item['gia'], 0, ',', '.') }} VNĐ
-                            </td>
-                            <td class="text-center">
-                                <div class="qty-control">
-                                    <a href="{{ route('giohang.update', ['key' => $key, 'type' => -1]) }}"
-                                        class="qty-btn">−</a>
-                                    <span class="qty-num">{{ $item['so_luong'] }}</span>
-                                    <a href="{{ route('giohang.update', ['key' => $key, 'type' => 1]) }}"
-                                        class="qty-btn">+</a>
-                                </div>
-                            </td>
-                            <td class="text-end price-col">
-                                {{ number_format($item['gia'] * $item['so_luong'], 0, ',', '.') }} VNĐ
-                            </td>
-                            <td class="text-center">
-                                <a href="{{ route('giohang.remove', ['key' => $key]) }}"
-                                    class="remove-btn"
-                                    onclick="return confirm('Xóa sản phẩm này?')">
-                                    <i class="bi bi-trash3"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="cart-footer">
-                    <a href="{{ route('sanpham.index') }}" class="btn-continue">
-                        <i class="bi bi-arrow-left"></i> Tiếp tục mua sắm
+            <div class="cart-items">
+                @foreach($gioHang as $key => $item)
+                <div class="cart-item-card">
+                    <img src="{{ asset('images/' . $item['hinh_anh']) }}"
+                        class="cart-item-img" alt="{{ $item['ten_sp'] }}" />
+
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">{{ $item['ten_sp'] }}</div>
+                        <div class="cart-item-meta">
+                            <span class="size-badge"><i class="bi bi-rulers"></i> {{ $item['size'] }}</span>
+                            <span class="unit-price">{{ number_format($item['gia'], 0, ',', '.') }} VNĐ / sản phẩm</span>
+                        </div>
+                    </div>
+
+                    <div class="qty-control">
+                        <a href="{{ route('giohang.update', ['key' => $key, 'type' => -1]) }}" class="qty-btn">−</a>
+                        <span class="qty-num">{{ $item['so_luong'] }}</span>
+                        <a href="{{ route('giohang.update', ['key' => $key, 'type' => 1]) }}" class="qty-btn">+</a>
+                    </div>
+
+                    <div class="subtotal-col">
+                        <div class="subtotal-label">Thành tiền</div>
+                        <div class="subtotal-price">{{ number_format($item['gia'] * $item['so_luong'], 0, ',', '.') }} VNĐ</div>
+                    </div>
+
+                    <a href="{{ route('giohang.remove', ['key' => $key]) }}"
+                        class="remove-btn"
+                        title="Xóa sản phẩm"
+                        onclick="return confirm('Xóa sản phẩm này khỏi giỏ hàng?')">
+                        <i class="bi bi-trash3"></i>
                     </a>
                 </div>
+                @endforeach
+            </div>
+
+            <div class="cart-continue">
+                <a href="{{ route('sanpham.index') }}" class="btn-continue">
+                    <i class="bi bi-arrow-left"></i> Tiếp tục mua sắm
+                </a>
             </div>
         </div>
 
@@ -396,20 +490,26 @@
                 </div>
                 <div class="summary-body">
                     <div class="summary-row">
-                        <span>Tổng tiền hàng:</span>
+                        <span>Tạm tính</span>
                         <span>{{ number_format($tongTien, 0, ',', '.') }} VNĐ</span>
                     </div>
                     <div class="summary-row">
-                        <span>Phí vận chuyển:</span>
+                        <span>Phí vận chuyển</span>
                         <span>30.000 VNĐ</span>
                     </div>
+                    <hr class="summary-divider">
                     <div class="summary-total">
-                        <span>Thanh toán:</span>
+                        <span>Thanh toán</span>
                         <span>{{ number_format($tongTien + 30000, 0, ',', '.') }} VNĐ</span>
                     </div>
-                    <a href="#" class="btn-checkout" id="btnThanhToan">
+
+                    <a href="{{ route('giohang.thanhtoan') }}" class="btn-checkout">
                         <i class="bi bi-bag-check-fill me-2"></i> Tiến Hành Thanh Toán
                     </a>
+
+                    <div class="summary-secure">
+                        <i class="bi bi-shield-check"></i> Thanh toán an toàn & bảo mật
+                    </div>
                 </div>
             </div>
         </div>
@@ -448,8 +548,8 @@
                     </div>
                 </div>
 
-                <a href="{{ route('sanpham.index') }}" class="btn-checkout" style="display:inline-block; width:auto; padding:12px 35px;">
-                    <i class="bi bi-bag me-2"></i> Tiếp tục mua sắm
+                <a href="{{ route('sanpham.index') }}" class="btn-checkout" style="display:inline-flex; width:auto; padding:12px 35px;">
+                    <i class="bi bi-bag"></i> Tiếp tục mua sắm
                 </a>
             </div>
         </div>
@@ -466,9 +566,14 @@
             new bootstrap.Modal(modal).show();
         }
     });
-    document.getElementById('btnThanhToan').addEventListener('click', function() {
-        alert('Thanh toán thành công! Cảm ơn bạn đã mua hàng tại Kingsman.');
-        window.location.href = "{{ route('giohang.checkout') }}";
-    });
+
+    const btnThanhToan = document.getElementById('btnThanhToan');
+    if (btnThanhToan) {
+        btnThanhToan.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Thanh toán thành công! Cảm ơn bạn đã mua hàng tại Kingsman.');
+            window.location.href = "{{ route('giohang.checkout') }}";
+        });
+    }
 </script>
 @endsection
