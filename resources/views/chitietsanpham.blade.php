@@ -4,6 +4,8 @@
 
 @section('content')
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,600;0,6..96,700;1,6..96,600&display=swap');
+
     .product-detail-container {
         background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
         min-height: 600px;
@@ -54,13 +56,13 @@
     }
 
     .product-title {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Bodoni Moda', 'Playfair Display', serif;
         color: #C5A059;
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: 2.8rem;
+        font-weight: 600;
         margin-bottom: 25px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        line-height: 1.25;
         position: relative;
         padding-bottom: 15px;
     }

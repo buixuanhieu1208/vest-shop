@@ -4,6 +4,16 @@
 
 @section('content')
 <style>
+    /* Ép carousel luôn trượt mượt, không bị Bootstrap tắt animation khi hệ điều hành bật "Reduce Motion" */
+    @media (prefers-reduced-motion: reduce) {
+        .hero-carousel .carousel-item {
+            transition: transform 0.6s ease-in-out !important;
+        }
+        .hero-carousel .carousel-fade .carousel-item {
+            transition: opacity 0.6s ease-in-out !important;
+        }
+    }
+
     /* CAROUSEL */
     .hero-carousel .carousel {
         height: 600px;
@@ -414,7 +424,18 @@
 </style>
 
 {{-- HERO CAROUSEL --}}
-<div class="hero-carousel" style="margin: -1.5rem -12px 0;">
+<div class="hero-carousel">
+    <style>
+        /* Kéo carousel tràn full-width thay vì dùng margin âm, tránh làm lệch layout khi transform trượt */
+        .hero-carousel {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+    </style>
     <div id="heroCarousel" class="carousel slide" style="height:600px;">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
@@ -565,10 +586,30 @@
 
 @section('scripts')
 <script>
-    new bootstrap.Carousel(document.getElementById('heroCarousel'), {
-        interval: 4000,
-        ride: 'carousel',
-        touch: true
+    // Watchdog: nếu carousel bị kẹt giữa 2 slide (do transition không hoàn tất),
+    // tự động dọn class thừa sau 1 giây để tránh đứng hình.
+    document.addEventListener('DOMContentLoaded', function () {
+        var carouselEl = document.getElementById('heroCarousel');
+        if (!carouselEl) return;
+
+        carouselEl.addEventListener('slide.bs.carousel', function () {
+            clearTimeout(carouselEl._watchdogTimer);
+            carouselEl._watchdogTimer = setTimeout(function () {
+                var items = carouselEl.querySelectorAll('.carousel-item');
+                var stuck = carouselEl.querySelectorAll(
+                    '.carousel-item-start, .carousel-item-end, .carousel-item-next, .carousel-item-prev'
+                );
+                if (stuck.length > 0) {
+                    // Bị kẹt: giữ lại đúng 1 item active, xóa hết class chuyển tiếp còn sót
+                    items.forEach(function (item) {
+                        item.classList.remove(
+                            'carousel-item-start', 'carousel-item-end',
+                            'carousel-item-next', 'carousel-item-prev'
+                        );
+                    });
+                }
+            }, 1000);
+        });
     });
 </script>
 @endsection

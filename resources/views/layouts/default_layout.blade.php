@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
-
+    
     <style>
         * {
             margin: 0;
@@ -24,6 +24,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         /* TOP BAR */
@@ -53,18 +54,26 @@
         .navbar {
             background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
             border-bottom: 2px solid #d4af37;
-            padding: 18px 0;
+            padding: 14px 0;
             box-shadow: 0 2px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .navbar .container-fluid {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            row-gap: 12px;
         }
 
         .navbar-brand {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.7rem;
             color: #d4af37 !important;
-            letter-spacing: 3px;
+            letter-spacing: 2.5px;
             font-weight: 700;
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
             transition: all 0.3s;
+            white-space: nowrap;
         }
 
         .navbar-brand:hover {
@@ -72,75 +81,142 @@
             text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
 
+        .navbar-nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+            margin: 0 auto;
+        }
+
         .nav-link-main {
-            color: #f0f0f0 !important;
+            color: #d0d0d0 !important;
             font-weight: 500;
+            font-size: 0.88rem;
+            padding: 9px 16px !important;
+            border-radius: 25px;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            text-decoration: none !important;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            line-height: 1.2;
+        }
+
+        .nav-link-main i {
             font-size: 0.95rem;
-            padding: 10px 18px !important;
-            position: relative;
-            border-radius: 4px;
-            transition: all 0.3s;
         }
 
-        .nav-link-main::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            left: 18px;
-            width: 0;
-            height: 2px;
+        .nav-link-main:hover,
+        .nav-link-main.active-link {
+            color: #000 !important;
             background: #d4af37;
-            transition: width 0.3s;
         }
 
-        .nav-link-main:hover {
-            color: #d4af37 !important;
-            background: rgba(212, 175, 55, 0.1);
+        .navbar-nav .dropdown-toggle::after {
+            margin-left: 4px;
+            vertical-align: 0.15em;
+            transition: transform 0.25s ease;
         }
 
-        .nav-link-main:hover::after {
-            width: calc(100% - 36px);
+        .dropdown-hover:hover .dropdown-toggle::after {
+            transform: rotate(180deg);
         }
 
         /* DROPDOWN */
-        .dropdown-hover:hover .dropdown-menu {
+        .dropdown-hover {
+            position: relative;
+        }
+
+        /* Vùng đệm vô hình nối liền nav-link với menu, tránh mất hover khi rê chuột xuống */
+        .dropdown-hover::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            height: 18px;
+        }
+
+        .dropdown-hover .dropdown-menu {
             display: block;
-            margin-top: 0;
+            position: absolute;
+            top: calc(100% + 14px);
+            left: 50%;
+            transform: translateX(-50%) translateY(6px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            min-width: 240px;
+        }
+
+        .dropdown-hover:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
         }
 
         .dropdown-menu {
-            background-color: #1a1a1a;
-            border: 1px solid #d4af37;
-            border-radius: 4px;
-            padding: 0.5rem 0;
+            background-color: #161616;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 10px;
+            padding: 6px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
         }
 
         .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             color: #c0c0c0;
-            padding: 10px 20px;
-            transition: all 0.3s;
+            padding: 10px 14px;
+            font-size: 0.87rem;
+            border-radius: 6px;
+            transition: background-color 0.18s ease, color 0.18s ease;
         }
 
-        .dropdown-item:hover {
-            background-color: #d4af37;
-            color: #000;
+        .dropdown-item i {
+            font-size: 0.95rem;
+            width: 16px;
+            text-align: center;
+            color: #d4af37;
+            flex-shrink: 0;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            background-color: rgba(212, 175, 55, 0.14);
+            color: #f0c864;
+        }
+
+        /* RIGHT-SIDE ACTIONS */
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-left: auto;
         }
 
         /* BUTTONS */
         .btn-action-gold {
             color: #d4af37 !important;
-            border: 2px solid #d4af37 !important;
+            border: 1.5px solid #d4af37 !important;
             background: transparent;
             border-radius: 25px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            padding: 9px 22px;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
+            padding: 8px 18px;
+            transition: all 0.25s;
+            letter-spacing: 0.3px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             text-decoration: none;
+            white-space: nowrap;
         }
 
         .btn-action-gold:hover {
@@ -154,13 +230,14 @@
         .user-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: #c0c0c0;
-            font-size: 0.9rem;
-            padding: 8px 16px;
+            font-size: 0.85rem;
+            padding: 7px 14px;
             background: rgba(42, 42, 42, 0.5);
             border-radius: 25px;
             border: 1px solid #333;
+            white-space: nowrap;
         }
 
         .user-info strong {
@@ -174,15 +251,53 @@
 
         .cart-badge .badge {
             position: absolute;
-            top: -5px;
-            right: -5px;
+            top: -6px;
+            right: -6px;
             background: #d4af37;
             color: #000;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 700;
-            padding: 3px 7px;
+            padding: 2px 6px;
             border-radius: 50%;
             border: 2px solid #1a1a1a;
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                margin: 8px 0;
+                width: 100%;
+            }
+
+            .navbar-actions {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            /* Trên mobile: navbar collapse theo chiều dọc nên dropdown hiển thị tĩnh, không dùng hover */
+            .dropdown-hover::after {
+                display: none;
+            }
+
+            .dropdown-hover .dropdown-menu {
+                position: static;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: none;
+                box-shadow: none;
+                margin: 4px 0 4px 12px;
+                border-left: 2px solid #d4af37;
+                border-radius: 6px;
+            }
+
+            .dropdown-hover .dropdown-menu::before {
+                display: none;
+            }
+
+            .dropdown-hover.show .dropdown-menu {
+                display: block;
+            }
         }
 
         /* SIDEBAR */
@@ -285,11 +400,14 @@
 
         ::-webkit-scrollbar-thumb {
             background: #d4af37;
-            border-radius: 5px;
+            border-radius: 2.5px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: #c19b2f;
+        }
+        a, a:hover {
+            text-decoration: none !important;
         }
     </style>
 </head>

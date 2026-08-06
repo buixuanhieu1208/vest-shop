@@ -59,6 +59,20 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        position: relative;
+    }
+
+    /* Lớp phủ link toàn bộ card - cho phép click bất kỳ đâu trên card để vào chi tiết */
+    .product-card-stretched-link {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    /* Nút Chi Tiết cần nổi lên trên lớp phủ để giữ hiệu ứng hover riêng của nó */
+    .product-actions {
+        position: relative;
+        z-index: 2;
     }
 
     .product-card:hover {
@@ -323,6 +337,7 @@
             @foreach($sanPhams as $sp)
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="product-card">
+                    <a href="{{ url('/san-pham/' . $sp->id) }}" class="product-card-stretched-link" aria-label="Xem chi tiết {{ $sp->ten_sp }}"></a>
                     <div class="product-img-wrap">
                         @if($sp->hinh_anh)
                         <img src="{{ asset('images/' . $sp->hinh_anh) }}" alt="{{ $sp->ten_sp }}">
