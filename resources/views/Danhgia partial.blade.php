@@ -251,25 +251,37 @@
     <div class="review-list">
         @forelse($sp->danhGia()->with('user')->latest()->get() as $dg)
         <div class="review-item">
-            <div class="review-user">
-                <img src="{{ $dg->user->avatar_url ?? 'https://ui-avatars.com/api/?name='.urlencode($dg->user->name).'&background=C5A059&color=000' }}" 
-                     class="review-avatar" alt="{{ $dg->user->name }}">
-                
-                <div>
-                    <div class="review-name">{{ $dg->user->name }}</div>
-                    <div class="review-stars">
-                        @for($i = 1; $i <= 5; $i++)
-                            @if($i <= $dg->so_sao)
-                                <i class="bi bi-star-fill"></i>
-                            @else
-                                <i class="bi bi-star"></i>
-                            @endif
-                        @endfor
-                        <span style="color: #666; font-size: 0.8rem; margin-left: 8px;">
-                            {{ $dg->created_at->format('d/m/Y') }}
-                        </span>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; margin-bottom: 10px;">
+                <div class="review-user" style="margin-bottom: 0;">
+                    <img src="{{ $dg->user->avatar_url ?? 'https://ui-avatars.com/api/?name='.urlencode($dg->user->name).'&background=C5A059&color=000' }}" 
+                         class="review-avatar" alt="{{ $dg->user->name }}">
+                    
+                    <div>
+                        <div class="review-name">{{ $dg->user->name }}</div>
+                        <div class="review-stars">
+                            @for($i = 1; $i <= 5; $i++)
+                                @if($i <= $dg->so_sao)
+                                    <i class="bi bi-star-fill"></i>
+                                @else
+                                    <i class="bi bi-star"></i>
+                                @endif
+                            @endfor
+                            <span style="color: #666; font-size: 0.8rem; margin-left: 8px;">
+                                {{ $dg->created_at->format('d/m/Y') }}
+                            </span>
+                        </div>
                     </div>
                 </div>
+
+                @if(auth()->check() && (auth()->id() === $dg->user_id || auth()->user()->quyen === 'Admin'))
+                <form action="{{ route('danhgia.destroy', $dg->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đánh giá này?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" style="background: transparent; border: none; color: #ff4444; font-size: 1.1rem; cursor: pointer; padding: 5px;">
+                        <i class="bi bi-trash3"></i>
+                    </button>
+                </form>
+                @endif
             </div>
             
             @if($dg->noi_dung)
