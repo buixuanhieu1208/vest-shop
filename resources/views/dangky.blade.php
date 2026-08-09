@@ -148,6 +148,29 @@
     .auth-divider::after {
         right: 0;
     }
+
+    .password-container {
+        position: relative;
+    }
+
+    .password-container .form-control {
+        padding-right: 45px; 
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 15px;
+        top: 38px;
+        cursor: pointer;
+        color: #888;
+        font-size: 1.1rem;
+        transition: color 0.2s;
+        z-index: 10;
+    }
+
+    .toggle-password:hover {
+        color: #C5A059;
+    }
 </style>
 
 <div class="auth-wrap">
@@ -185,11 +208,12 @@
                         placeholder="example@email.com">
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4 password-container">
                     <label class="form-label">Mật khẩu</label>
                     <input type="password" name="password" class="form-control"
                         required autocomplete="new-password"
                         placeholder="Ít nhất 6 ký tự">
+                    <i class="bi bi-eye-slash toggle-password"></i>
                 </div>
 
                 <button type="submit" class="btn-gold mb-4">
@@ -207,4 +231,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const togglePasswords = document.querySelectorAll('.toggle-password');
+        
+        togglePasswords.forEach(function(icon) {
+            icon.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                
+                if (input.type === 'password') {
+                    input.type = 'text'; 
+                    this.classList.remove('bi-eye-slash');
+                    this.classList.add('bi-eye'); 
+                } else {
+                    input.type = 'password'; 
+                    this.classList.remove('bi-eye');
+                    this.classList.add('bi-eye-slash');
+                }
+            });
+        });
+    });
+</script>
 @endsection
