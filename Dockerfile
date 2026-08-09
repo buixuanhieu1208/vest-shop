@@ -1,5 +1,5 @@
 # Dockerfile để deploy Laravel lên Render.com
-FROM php:8.2-apache
+FROM php:8.3-apache
 
 # Cài các extension PHP cần thiết cho Laravel + MySQL
 RUN apt-get update && apt-get install -y \
