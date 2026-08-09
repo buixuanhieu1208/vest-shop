@@ -1,17 +1,17 @@
-# Kingsman Shop Vest 🎩
+# Kingsman Shop Vest 
 
 Website thương mại điện tử bán vest online, xây dựng bằng Laravel. Dự án cá nhân, phát triển từ thiết kế cơ sở dữ liệu, giao diện đến triển khai (deploy) thực tế.
 
-**🔗 Live Demo:** [vest-shop.onrender.com](https://vest-shop.onrender.com)
+**Live Demo:** [vest-shop.onrender.com](https://vest-shop.onrender.com)
 *(Lưu ý: server dùng gói Free của Render, nếu không có truy cập trong ~15 phút sẽ tự "ngủ", lần load đầu tiên sau đó có thể mất 30-60s để khởi động lại.)*
 
 ---
 
-## 📋 Giới thiệu
+## Giới thiệu
 
 Kingsman Shop Vest là website bán vest/suit cao cấp theo phong cách sang trọng (theme đen - vàng gold), phục vụ cả khách hàng (mua sắm) và quản trị viên (quản lý sản phẩm, đơn hàng, người dùng).
 
-## ✨ Tính năng chính
+## Tính năng chính
 
 **Dành cho khách hàng:**
 - Xem danh sách sản phẩm, lọc theo danh mục, tìm kiếm theo tên/chất liệu/xuất xứ
@@ -43,7 +43,7 @@ Kingsman Shop Vest là website bán vest/suit cao cấp theo phong cách sang tr
 - [Render](https://render.com) — hosting web service (Free tier)
 - [Clever Cloud](https://www.clever-cloud.com) — MySQL database (Free tier)
 
-## 📁 Cấu trúc thư mục chính
+## Cấu trúc thư mục chính
 
 ```
 app/
@@ -60,7 +60,7 @@ routes/
 Dockerfile                  # Cấu hình build & deploy qua Docker
 ```
 
-## 🚀 Cài đặt & chạy local
+## Cài đặt & chạy local
 
 ### Yêu cầu
 - PHP >= 8.3
@@ -109,11 +109,11 @@ php artisan serve
 
 Truy cập tại: `http://127.0.0.1:8000`
 
-## 🐳 Deploy bằng Docker
+## Deploy bằng Docker
 
 Project đã có sẵn `Dockerfile` để deploy lên các nền tảng hỗ trợ Docker (Render, Railway, Fly.io...). Container sẽ tự động chạy migration khi khởi động.
 
-## 👤 Tác giả
+## Tác giả
 
 **Bùi Xuân Hiếu**
 - GitHub: [@buixuanhieu1208](https://github.com/buixuanhieu1208)
@@ -121,4 +121,3 @@ Project đã có sẵn `Dockerfile` để deploy lên các nền tảng hỗ tr�
 
 ---
 
-*Dự án được thực hiện với mục đích học tập, thực hành phát triển ứng dụng web full-stack bằng Laravel.*
