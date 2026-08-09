@@ -33,6 +33,9 @@
         cursor: grab;
         touch-action: pan-y;
         user-select: none;
+        
+        /* THÊM DÒNG NÀY ĐỂ FIX LỖI ĐEN ẢNH */
+        overflow: visible !important; 
     }
 
     .hero-carousel .carousel-inner.is-dragging {
@@ -508,6 +511,7 @@
                 right: 50%;
                 margin-left: -50vw;
                 margin-right: -50vw;
+                overflow: hidden;
             }
         </style>
         <div id="heroCarousel" class="carousel slide">
