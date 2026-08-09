@@ -694,6 +694,15 @@
             </div>
         </div>
 
+        {{-- SỬA TÊN TÀI KHOẢN --}}
+        <div class="nd-modal-section-title">Chỉnh sửa tên tài khoản</div>
+        <form class="nd-role-form" id="nd-name-form" method="POST" action="">
+            @csrf
+            @method('PUT')
+            <input type="text" name="name" id="nd-modal-name-input" required style="flex: 1; background: #111; border: 2px solid #363636; color: #e0e0e0; border-radius: 9px; padding: 10px 14px; font-size: 0.88rem;">
+            <button type="submit"><i class="bi bi-check2"></i> Lưu tên</button>
+        </form>
+
         <div class="nd-modal-section-title">Đổi quyền tài khoản</div>
         <form class="nd-role-form" id="nd-role-form" method="POST" action="">
             @csrf
@@ -701,7 +710,7 @@
                 <option value="Khách hàng">Khách hàng</option>
                 <option value="Admin">Admin</option>
             </select>
-            <button type="submit"><i class="bi bi-check2"></i> Lưu</button>
+            <button type="submit"><i class="bi bi-check2"></i> Đổi quyền</button>
         </form>
 
         <form class="nd-delete-form" id="nd-delete-form" method="POST" action=""
@@ -723,7 +732,10 @@
             ? new Date(nd.created_at).toLocaleDateString('vi-VN')
             : '—';
 
+        document.getElementById('nd-modal-name-input').value = nd.name;
         document.getElementById('nd-modal-quyen-select').value = nd.quyen;
+        
+        document.getElementById('nd-name-form').action = "{{ url('/nguoi-dung') }}/" + nd.id + "/sua-ten";
         document.getElementById('nd-role-form').action = "{{ url('/nguoi-dung') }}/" + nd.id + "/quyen";
         document.getElementById('nd-delete-form').action = "{{ url('/nguoi-dung') }}/" + nd.id + "/xoa";
 

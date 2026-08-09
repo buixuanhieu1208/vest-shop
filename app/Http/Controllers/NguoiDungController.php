@@ -66,4 +66,16 @@ class NguoiDungController extends Controller
 
         return back()->with('success', $thongBao);
     }
+    public function suaTen(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $nguoiDung = User::findOrFail($id);
+        $nguoiDung->name = $request->name;
+        $nguoiDung->save();
+
+        return back()->with('success', 'Đã cập nhật tên tài khoản thành công!');
+    }
 }
