@@ -31,4 +31,9 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+# Script khởi động: tự động chạy migrate rồi mới start Apache
+# (cần thiết vì gói Free của Render không cho phép vào Shell thủ công)
+RUN echo '#!/bin/bash\nphp artisan migrate --force\napache2-foreground' > /usr/local/bin/start.sh \
+    && chmod +x /usr/local/bin/start.sh
+
+CMD ["/usr/local/bin/start.sh"]
