@@ -397,6 +397,21 @@
             justify-content: center;
         }
     }
+
+    @media (max-width: 576px) {
+        .product-detail-container { padding: 30px 0; }
+        .product-image-wrapper img { height: 300px; }
+        .product-info-section { padding: 20px 16px; }
+        .product-title { font-size: 1.5rem; }
+        .product-price { font-size: 1.4rem; padding: 10px 16px; }
+        .detail-label { min-width: 95px; font-size: 0.95rem; }
+        .detail-value { font-size: 0.9rem; }
+
+        .size-option label { width: 56px; height: 56px; font-size: 0.95rem; }
+        .btn-luxury { padding: 13px 20px; font-size: 0.9rem; }
+
+        .related-products h4 { font-size: 1.4rem; }
+    }
 </style>
 
 <div class="product-detail-container">

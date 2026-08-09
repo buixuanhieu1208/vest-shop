@@ -379,6 +379,23 @@
             transform: translateX(20px);
         }
     }
+
+    /* ===== RESPONSIVE MOBILE ===== */
+    @media (max-width: 768px) {
+        .section-header h2 { font-size: 1.5rem; letter-spacing: 1px; }
+        .product-img-wrap { height: 260px; }
+        .toast-success { left: 12px; right: 12px; top: 75px; font-size: 0.82rem; }
+
+        /* form tìm kiếm: input co giãn theo màn hình, nút xuống dòng gọn */
+        .products-section ~ * ,
+        form[method="GET"] { flex-wrap: wrap; }
+    }
+
+    @media (max-width: 480px) {
+        .cart-form { flex-direction: column; }
+        .size-select { flex: 1 1 auto; width: 100%; }
+        .btn-add-cart { width: 100%; }
+    }
 </style>
 
 {{-- THANH TÌM KIẾM --}}
@@ -391,7 +408,7 @@
     @endif
 
     <div class="container">
-        <form method="GET" action="{{ url('/san-pham') }}" class="d-flex gap-2 justify-content-center">
+        <form method="GET" action="{{ url('/san-pham') }}" class="d-flex gap-2 justify-content-center flex-wrap">
             {{-- Giữ filter danh mục nếu đang lọc --}}
             @if(request('danh_muc'))
             <input type="hidden" name="danh_muc" value="{{ request('danh_muc') }}">
@@ -401,7 +418,7 @@
                 value="{{ request('tim_kiem') }}"
                 placeholder="Tìm theo tên, chất liệu, xuất xứ..."
                 style="background:#1a1a1a; border: 1px solid #444; border-radius:25px;
-                          color:#fff; padding: 10px 20px; width: 400px; outline:none;
+                          color:#fff; padding: 10px 20px; width: 400px; max-width: 100%; outline:none;
                           transition: border-color 0.3s;"
                 onfocus="this.style.borderColor='#d4af37'"
                 onblur="this.style.borderColor='#444'">

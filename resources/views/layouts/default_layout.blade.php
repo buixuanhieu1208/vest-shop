@@ -352,6 +352,14 @@
             }
         }
 
+        @media (max-width: 576px) {
+            .top-bar { font-size: 0.72rem; padding: 6px 0; }
+            .top-bar a { margin: 0 6px; }
+            .navbar-brand { font-size: 1.15rem; }
+            .main-content { padding: 16px 0; }
+            .main-content .row.px-3 { padding-left: 6px !important; padding-right: 6px !important; }
+        }
+
         /* SIDEBAR */
         .sidebar {
             background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);

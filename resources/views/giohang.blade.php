@@ -403,6 +403,19 @@
             text-align: left;
             margin-left: auto;
         }
+
+        .cart-title { font-size: 1.5rem; }
+        .cart-item-card { padding: 14px; gap: 12px; }
+        .cart-item-img { width: 64px; height: 64px; }
+        .cart-item-name { white-space: normal; }
+        .summary-card { position: static; margin-top: 10px; }
+    }
+
+    @media (max-width: 420px) {
+        .cart-item-img { display: none; }
+        .qty-control { order: 3; }
+        .subtotal-col { order: 4; }
+        .remove-btn { order: 5; margin-left: auto; }
     }
 </style>
 

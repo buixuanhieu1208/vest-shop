@@ -421,6 +421,49 @@
         color: #000;
         box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
     }
+
+    /* ===== RESPONSIVE MOBILE ===== */
+    @media (max-width: 768px) {
+        .hero-carousel .carousel,
+        .hero-carousel { height: 420px; }
+
+        .carousel-content { padding: 20px; max-width: 100%; }
+        .carousel-title { font-size: 1.7rem; }
+        .carousel-description { font-size: 0.92rem; margin-bottom: 20px; }
+        .carousel-badge { font-size: 0.75rem; padding: 6px 16px; }
+        .btn-carousel { padding: 10px 22px; font-size: 0.9rem; }
+
+        .carousel-control-prev,
+        .carousel-control-next { width: 38px; height: 38px; opacity: 0.7; }
+        .carousel-control-prev { left: 10px; }
+        .carousel-control-next { right: 10px; }
+
+        .about-section { padding: 45px 0; }
+        .about-section::before { font-size: 4rem; }
+        .section-title { font-size: 1.7rem; letter-spacing: 1px; }
+        .section-subtitle { font-size: 0.92rem; margin-bottom: 30px; }
+
+        .about-images { flex-direction: column; gap: 14px; margin-bottom: 25px; }
+        .main-image img,
+        .side-image img { height: 240px; }
+
+        .about-description { padding: 22px; margin-top: 25px; }
+        .about-description::before { font-size: 5rem; top: -18px; left: 20px; }
+        .about-description h3 { font-size: 1.3rem; }
+
+        .stats-section { gap: 14px; margin-top: 30px; }
+        .stat-card { padding: 20px 24px; min-width: 150px; }
+        .stat-number { font-size: 2rem; }
+
+        .product-image { height: 220px; }
+    }
+
+    @media (max-width: 480px) {
+        .hero-carousel .carousel,
+        .hero-carousel { height: 340px; }
+        .carousel-title { font-size: 1.35rem; }
+        .carousel-description { display: none; }
+    }
 </style>
 
 {{-- HERO CAROUSEL --}}
@@ -436,7 +479,7 @@
             margin-right: -50vw;
         }
     </style>
-    <div id="heroCarousel" class="carousel slide" style="height:600px;">
+    <div id="heroCarousel" class="carousel slide">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
