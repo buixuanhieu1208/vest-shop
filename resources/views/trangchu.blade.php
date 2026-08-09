@@ -335,10 +335,12 @@
     }
 
     .stat-number {
-        font-family: 'Lora', serif;
-        font-size: 2.8rem;
+        font-family: 'Be Vietnam Pro', sans-serif; /* Nếu bạn vẫn dùng Montserrat thì đổi thành 'Montserrat' nhé */
+        font-size: 3.2rem; /* Tăng kích thước lên một chút cho hoành tráng */
         font-weight: 700;
         color: #d4af37;
+        letter-spacing: 1px; /* Tạo khoảng cách chữ số cho dễ nhìn */
+        font-variant-numeric: lining-nums tabular-nums;
     }
 
     .stat-label {
