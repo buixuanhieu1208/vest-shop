@@ -305,56 +305,50 @@
 
         @media (max-width: 991.98px) {
             #navbarNav {
-                flex-wrap: wrap;
-                justify-content: flex-start;
+                position: absolute;
+                top: 100%; 
+                left: 0;
+                right: 0;
+                background: #111;
+                border-top: 1px solid #2a2a2a;
+                border-bottom: 2px solid #d4af37;
+                margin: 0;
+                padding: 15px 20px 20px;
+                box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+                z-index: 1050;
             }
 
             .navbar-nav {
-                flex-wrap: wrap;
-                flex-shrink: 1;
-                margin: 8px 0;
                 width: 100%;
-                justify-content: flex-start;
+            }
+
+            .navbar-nav .nav-item {
+                width: 100%;
+                border-bottom: 1px solid #222;
             }
 
             .nav-link-main {
-                font-size: 0.88rem;
-                padding: 9px 16px !important;
-            }
-
-            .nav-link-main i {
-                font-size: 0.95rem;
+                width: 100%;
+                border-radius: 0 !important;
+                padding: 12px 4px !important;
+                justify-content: flex-start;
             }
 
             .navbar-actions {
                 width: 100%;
-                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 10px;
+                padding-top: 12px;
             }
 
-            /* Trên mobile: navbar collapse theo chiều dọc nên dropdown hiển thị tĩnh, không dùng hover */
-            .dropdown-hover::after {
-                display: none;
+            .navbar-actions .user-info {
+                justify-content: center;
             }
 
-            .dropdown-hover .dropdown-menu {
-                position: static;
-                display: none;
-                opacity: 1;
-                visibility: visible;
-                pointer-events: auto;
-                transform: none;
-                box-shadow: none;
-                margin: 4px 0 4px 12px;
-                border-left: 2px solid #d4af37;
-                border-radius: 6px;
-            }
-
-            .dropdown-hover .dropdown-menu::before {
-                display: none;
-            }
-
-            .dropdown-hover.show .dropdown-menu {
-                display: block;
+            .navbar-actions .btn-action-gold {
+                justify-content: center;
+                width: 100%;
             }
         }
 
