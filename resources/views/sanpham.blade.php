@@ -37,7 +37,7 @@
     }
 
     .section-header h2 {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Lora', serif;
         color: #d4af37;
         font-size: 2.2rem;
         font-weight: 700;
@@ -178,7 +178,8 @@
         color: #d4af37;
         font-size: 1.3rem;
         font-weight: 700;
-        font-family: 'Playfair Display', serif;
+        font-family: 'Be Vietnam Pro', sans-serif; 
+        font-variant-numeric: lining-nums tabular-nums;
     }
 
     .product-actions {
