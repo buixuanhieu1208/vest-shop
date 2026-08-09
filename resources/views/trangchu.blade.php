@@ -4,7 +4,6 @@
 
 @section('content')
 <style>
-    /* Ép carousel luôn trượt mượt, không bị Bootstrap tắt animation khi hệ điều hành bật "Reduce Motion" */
     @media (prefers-reduced-motion: reduce) {
         .hero-carousel .carousel-item {
             transition: transform 0.6s ease-in-out !important;
@@ -24,8 +23,7 @@
         height: 100%;
     }
 
-    /* Biến carousel-inner thành 1 track flex kéo tự do bằng chuột/ngón tay,
-       bỏ cơ chế ẩn/hiện position:absolute mặc định của Bootstrap */
+
     .hero-carousel .carousel-inner {
         display: flex;
         transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -34,7 +32,6 @@
         touch-action: pan-y;
         user-select: none;
         
-        /* THÊM DÒNG NÀY ĐỂ FIX LỖI ĐEN ẢNH */
         overflow: visible !important; 
     }
 
@@ -55,7 +52,7 @@
     }
 
     .hero-carousel .carousel-item img {
-        pointer-events: none; /* ảnh nền không chặn thao tác kéo, nhưng nút/link vẫn bấm được */
+        pointer-events: none;
     }
 
     .carousel-slide {
@@ -335,11 +332,11 @@
     }
 
     .stat-number {
-        font-family: 'Be Vietnam Pro', sans-serif; /* Nếu bạn vẫn dùng Montserrat thì đổi thành 'Montserrat' nhé */
-        font-size: 3.2rem; /* Tăng kích thước lên một chút cho hoành tráng */
+        font-family: 'Be Vietnam Pro', sans-serif; 
+        font-size: 3.2rem; 
         font-weight: 700;
         color: #d4af37;
-        letter-spacing: 1px; /* Tạo khoảng cách chữ số cho dễ nhìn */
+        letter-spacing: 1px; 
         font-variant-numeric: lining-nums tabular-nums;
     }
 
@@ -505,7 +502,6 @@
     {{-- HERO CAROUSEL --}}
     <div class="hero-carousel">
         <style>
-            /* Kéo carousel tràn full-width thay vì dùng margin âm, tránh làm lệch layout khi transform trượt */
             .hero-carousel {
                 width: 100vw;
                 position: relative;
@@ -666,7 +662,7 @@
 
 @section('scripts')
 <script>
-    // ===== HERO CAROUSEL: kéo tự do bằng chuột hoặc ngón tay (Pointer Events) =====
+    // ===== HERO CAROUSEL =====
     document.addEventListener('DOMContentLoaded', function () {
         const wrap = document.querySelector('.hero-carousel');
         const track = document.getElementById('heroCarousel')?.querySelector('.carousel-inner');
@@ -685,12 +681,9 @@
         let containerWidth = wrap.getBoundingClientRect().width;
         let autoplayTimer = null;
         const AUTOPLAY_MS = 4000;
-        const DRAG_THRESHOLD_RATIO = 0.15; // kéo quá 15% bề rộng thì mới chuyển slide
-        const EDGE_RESISTANCE = 0.35; // lực cản khi kéo ở slide đầu/cuối
+        const DRAG_THRESHOLD_RATIO = 0.15;
+        const EDGE_RESISTANCE = 0.35;
 
-        // Vị trí gốc luôn tính bằng % (chính xác tuyệt đối theo đúng từng slide,
-        // không phụ thuộc đo bề rộng bằng JS -> tránh lệch dồn khi qua nhiều slide).
-        // Phần lệch khi đang kéo tay (applyPx) cộng thêm bằng px thông qua calc().
         function setTransform(applyPx = 0) {
             track.style.transform = `translateX(calc(${-currentIndex * 100}% + ${applyPx}px))`;
         }
@@ -726,23 +719,20 @@
         function startAutoplay() {
             stopAutoplay();
             autoplayTimer = setInterval(() => {
-                currentIndex = (currentIndex + 1) % total; // autoplay thì lặp vòng
+                currentIndex = (currentIndex + 1) % total; 
                 render(true);
             }, AUTOPLAY_MS);
         }
 
-        // ===== ĐIỀU HƯỚNG BẰNG NÚT / CHẤM TRÒN =====
         btnPrev?.addEventListener('click', (e) => { e.preventDefault(); goTo(currentIndex - 1); startAutoplay(); });
         btnNext?.addEventListener('click', (e) => { e.preventDefault(); goTo(currentIndex + 1); startAutoplay(); });
         indicators.forEach((btn, i) => {
             btn.addEventListener('click', () => { goTo(i); startAutoplay(); });
         });
 
-        // ===== KÉO TỰ DO BẰNG CHUỘT / NGÓN TAY =====
-        let draggedFar = false; // để phân biệt click vs kéo (tránh bấm nhầm nút CTA khi vừa kéo xong)
+        let draggedFar = false; 
 
         track.addEventListener('pointerdown', (e) => {
-            // chỉ chuột trái (nếu là chuột)
             if (e.pointerType === 'mouse' && e.button !== 0) return;
 
             isDragging = true;
@@ -761,7 +751,6 @@
 
             if (Math.abs(deltaX) > 6) draggedFar = true;
 
-            // lực cản khi đang ở slide đầu mà kéo sang phải, hoặc slide cuối mà kéo sang trái
             let applied = deltaX;
             if ((currentIndex === 0 && deltaX > 0) || (currentIndex === total - 1 && deltaX < 0)) {
                 applied = deltaX * EDGE_RESISTANCE;
@@ -778,11 +767,11 @@
             const threshold = containerWidth * DRAG_THRESHOLD_RATIO;
 
             if (deltaX <= -threshold) {
-                goTo(currentIndex + 1); // kéo sang trái -> slide kế tiếp
+                goTo(currentIndex + 1);
             } else if (deltaX >= threshold) {
-                goTo(currentIndex - 1); // kéo sang phải -> slide trước
+                goTo(currentIndex - 1); 
             } else {
-                render(true); // kéo chưa đủ xa -> bật lại vị trí cũ
+                render(true); 
             }
 
             deltaX = 0;
@@ -792,11 +781,9 @@
         track.addEventListener('pointerup', endDrag);
         track.addEventListener('pointercancel', endDrag);
         track.addEventListener('pointerleave', (e) => {
-            // chỉ huỷ kéo khi rời hẳn khỏi track trong lúc đang giữ chuột (không áp dụng khi dùng cảm ứng)
             if (isDragging && e.pointerType === 'mouse') endDrag(e);
         });
 
-        // Chặn click vào link/nút bên trong slide nếu vừa mới kéo (tránh bấm nhầm)
         track.addEventListener('click', (e) => {
             if (draggedFar) {
                 e.preventDefault();
@@ -805,11 +792,9 @@
             }
         }, true);
 
-        // Dừng tự động chạy khi rê chuột vào carousel, chạy lại khi rời ra
         wrap.addEventListener('mouseenter', stopAutoplay);
         wrap.addEventListener('mouseleave', () => { if (!isDragging) startAutoplay(); });
 
-        // Cập nhật lại bề rộng khi resize màn hình (xoay ngang điện thoại, đổi cỡ cửa sổ...)
         window.addEventListener('resize', () => {
             containerWidth = wrap.getBoundingClientRect().width;
             render(false);

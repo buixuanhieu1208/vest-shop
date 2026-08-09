@@ -65,9 +65,7 @@
             gap: 18px;
         }
 
-        /* Khối chứa nav + actions (Bootstrap collapse) luôn cùng hàng với logo — CHỈ áp dụng desktop.
-           (dùng #id nên độ ưu tiên rất cao, nếu để chung mọi màn hình sẽ đè mất cơ chế ẩn/hiện
-           của Bootstrap trên mobile khiến menu bị lộ nửa vời) */
+
         @media (min-width: 992px) {
             #navbarNav {
                 display: flex;
@@ -155,7 +153,6 @@
             position: relative;
         }
 
-        /* Vùng đệm vô hình nối liền nav-link với menu, tránh mất hover khi rê chuột xuống */
         .dropdown-hover::after {
             content: '';
             position: absolute;
@@ -253,7 +250,6 @@
             box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* USER INFO — avatar tròn viết tắt chữ cái đầu, gọn hơn nhiều so với hiện tên đầy đủ */
         .user-info {
             display: flex;
             align-items: center;
@@ -360,7 +356,6 @@
             .main-content .row.px-3 { padding-left: 6px !important; padding-right: 6px !important; }
         }
 
-        /* ===== NÚT MENU (1 nút bấm mở/thu, chỉ hiện mobile) ===== */
         .navbar-toggler-icon-custom {
             font-size: 1.6rem;
             color: #d4af37;
@@ -368,7 +363,6 @@
         }
 
         @media (max-width: 991.98px) {
-            /* Menu ẩn/hiện ngay dưới navbar, không che kín màn hình */
             #navbarNav {
                 background: #111;
                 border-top: 1px solid #2a2a2a;
@@ -689,7 +683,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Active nav highlight
         const currentPath = window.location.pathname;
         document.querySelectorAll('.nav-link-main').forEach(link => {
             if (link.getAttribute('href') === currentPath) {
@@ -698,7 +691,6 @@
             }
         });
 
-        // Khởi tạo lại Carousel với touch: true để vuốt mượt mà không bị đen ảnh
         document.addEventListener('DOMContentLoaded', function() {
             var el = document.querySelector('#heroCarousel');
             if (el && typeof bootstrap !== 'undefined') {

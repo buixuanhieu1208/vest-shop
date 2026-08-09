@@ -199,7 +199,7 @@
         <span class="rating-count">({{ $sp->so_luong_danh_gia }} đánh giá)</span>
     </div>
 
-    {{-- FORM GỬI ĐÁNH GIÁ (chỉ hiện khi đã đăng nhập) --}}
+    {{-- FORM GỬI ĐÁNH GIÁ --}}
     @auth
     <div class="review-form-container">
         {{-- Thêm enctype="multipart/form-data" để cho phép up file --}}
