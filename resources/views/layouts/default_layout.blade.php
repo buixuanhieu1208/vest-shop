@@ -326,7 +326,7 @@
             .nav-link-main {
                 width: 100%;
                 border-radius: 0 !important;
-                padding: 12px 15px !important;
+                padding: 12px 25px !important;
                 justify-content: flex-start;
             }
 
@@ -343,7 +343,7 @@
                 transform: none !important;
                 inset: auto !important;
                 box-shadow: none;
-                margin: 4px 0 10px 40px !important;
+                margin: 4px 0 10px 50px !important;
                 border: none;
                 border-left: 2px solid #d4af37;
                 border-radius: 0;
@@ -586,7 +586,6 @@
                 <i class="bi bi-gem"></i> KINGSMAN
             </a>
 
-            {{-- Icon giỏ hàng nhanh - chỉ hiện trên mobile/tablet --}}
             <a href="{{ Auth::check() ? url('/gio-hang') : url('/dang-nhap') }}"
                 class="d-lg-none cart-badge order-lg-3" style="color:#d4af37; font-size:1.3rem; position:relative; margin-left:auto; margin-right:10px;">
                 <i class="bi bi-cart3"></i>
@@ -598,13 +597,12 @@
                 @endif
             </a>
 
-            {{-- Nút menu 1 nút bấm để mở/thu (chỉ mobile/tablet) --}}
+
             <button class="navbar-toggler border-0 d-lg-none" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav">
                 <i class="bi bi-list navbar-toggler-icon-custom"></i>
             </button>
 
-            {{-- MENU: desktop hiện ngang cố định, mobile là dropdown ẩn/hiện dưới navbar --}}
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -659,7 +657,6 @@
                     </a>
                     @endif
 
-                    {{-- Nút giỏ hàng dạng chữ - chỉ hiện desktop, mobile đã có icon riêng ở trên --}}
                     @if(Auth::check())
                     <a href="{{ url('/gio-hang') }}" class="btn-action-gold cart-badge d-none d-lg-inline-flex">
                         <i class="bi bi-cart3"></i> Giỏ hàng
