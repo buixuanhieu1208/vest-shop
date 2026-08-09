@@ -682,11 +682,18 @@
         const DRAG_THRESHOLD_RATIO = 0.15; // kéo quá 15% bề rộng thì mới chuyển slide
         const EDGE_RESISTANCE = 0.35; // lực cản khi kéo ở slide đầu/cuối
 
+        // Vị trí gốc luôn tính bằng % (chính xác tuyệt đối theo đúng từng slide,
+        // không phụ thuộc đo bề rộng bằng JS -> tránh lệch dồn khi qua nhiều slide).
+        // Phần lệch khi đang kéo tay (applyPx) cộng thêm bằng px thông qua calc().
+        function setTransform(applyPx = 0) {
+            track.style.transform = `translateX(calc(${-currentIndex * 100}% + ${applyPx}px))`;
+        }
+
         function render(animate = true) {
             track.style.transition = animate
                 ? 'transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1)'
                 : 'none';
-            track.style.transform = `translateX(${-currentIndex * containerWidth}px)`;
+            setTransform(0);
 
             slides.forEach((s, i) => s.classList.toggle('active', i === currentIndex));
             indicators.forEach((b, i) => {
@@ -748,8 +755,7 @@
                 applied = deltaX * EDGE_RESISTANCE;
             }
 
-            const base = -currentIndex * containerWidth;
-            track.style.transform = `translateX(${base + applied}px)`;
+            setTransform(applied);
         });
 
         function endDrag(e) {
