@@ -386,16 +386,27 @@
         .section-header h2 { font-size: 1.5rem; letter-spacing: 1px; }
         .product-img-wrap { height: 260px; }
         .toast-success { left: 12px; right: 12px; top: 75px; font-size: 0.82rem; }
-
-        /* form tìm kiếm: input co giãn theo màn hình, nút xuống dòng gọn */
         .products-section ~ * ,
         form[method="GET"] { flex-wrap: wrap; }
     }
 
     @media (max-width: 480px) {
-        .cart-form { flex-direction: column; }
-        .size-select { flex: 1 1 auto; width: 100%; }
-        .btn-add-cart { width: 100%; }
+        .cart-form { 
+            flex-direction: row;
+            gap: 8px;
+        }
+        .size-select { 
+            flex: 0 0 95px; 
+            width: auto;
+            height: 38px;
+            font-size: 0.8rem;
+        }
+        .btn-add-cart { 
+            flex: 1; 
+            width: auto;
+            height: 38px; 
+            font-size: 0.82rem; 
+        }
     }
 </style>
 
