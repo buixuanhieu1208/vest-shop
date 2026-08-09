@@ -360,95 +360,54 @@
             .main-content .row.px-3 { padding-left: 6px !important; padding-right: 6px !important; }
         }
 
-        /* ===== OFFCANVAS MOBILE MENU (kiểu Thế Giới Di Động) ===== */
-        .navbar .container-fluid {
-            justify-content: space-between;
-        }
-
-        .mobile-menu {
-            width: 82%;
-            max-width: 340px;
-            background: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
-            border-right: 2px solid #d4af37;
-        }
-
-        .mobile-menu .offcanvas-header {
-            border-bottom: 1px solid #2a2a2a;
-            padding: 16px 18px;
-        }
-
-        .mobile-menu .btn-close {
-            opacity: 0.9;
-        }
-
-        .mobile-user-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            border-radius: 12px;
-            padding: 12px 14px;
-            margin-bottom: 18px;
-            color: #f0f0f0;
-        }
-
-        .mobile-nav-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .mobile-nav-list li a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #e0e0e0;
-            text-decoration: none;
-            padding: 13px 10px;
-            font-size: 0.98rem;
-            font-weight: 500;
-            border-bottom: 1px solid #1f1f1f;
-            transition: all 0.2s;
-        }
-
-        .mobile-nav-list li a i {
+        /* ===== NÚT MENU (1 nút bấm mở/thu, chỉ hiện mobile) ===== */
+        .navbar-toggler-icon-custom {
+            font-size: 1.6rem;
             color: #d4af37;
-            font-size: 1.1rem;
-            width: 22px;
-            text-align: center;
+            transition: transform 0.25s ease;
         }
 
-        .mobile-nav-list li a:hover,
-        .mobile-nav-list li a:active {
-            background: rgba(212, 175, 55, 0.08);
-            color: #d4af37;
-            padding-left: 16px;
-        }
+        @media (max-width: 991.98px) {
+            /* Menu ẩn/hiện ngay dưới navbar, không che kín màn hình */
+            #navbarNav {
+                background: #111;
+                border-top: 1px solid #2a2a2a;
+                margin: 12px -1.5rem -12px;
+                padding: 6px 1.5rem 14px;
+            }
 
-        .mobile-nav-divider {
-            color: #777;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 16px 10px 6px;
-            font-weight: 700;
-        }
+            .navbar-nav {
+                width: 100%;
+            }
 
-        .mobile-badge {
-            margin-left: auto;
-            background: #d4af37;
-            color: #000;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 20px;
-        }
+            .navbar-nav .nav-item {
+                width: 100%;
+                border-bottom: 1px solid #222;
+            }
 
-        .mobile-menu-footer {
-            margin-top: 22px;
-            padding-top: 18px;
-            border-top: 1px solid #2a2a2a;
+            .nav-link-main {
+                width: 100%;
+                border-radius: 0 !important;
+                padding: 12px 4px !important;
+                justify-content: flex-start;
+            }
+
+            .navbar-actions {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 10px;
+                padding-top: 12px;
+            }
+
+            .navbar-actions .user-info {
+                justify-content: center;
+            }
+
+            .navbar-actions .btn-action-gold {
+                justify-content: center;
+                width: 100%;
+            }
         }
 
         /* SIDEBAR */
@@ -584,19 +543,13 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid px-4">
 
-            {{-- Nút menu - chỉ hiện trên mobile/tablet --}}
-            <button class="navbar-toggler border-0 d-lg-none" type="button"
-                data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-                <i class="bi bi-list" style="font-size:1.6rem; color:#d4af37;"></i>
-            </button>
-
             <a class="navbar-brand" href="{{ url('/') }}">
                 <i class="bi bi-gem"></i> KINGSMAN
             </a>
 
             {{-- Icon giỏ hàng nhanh - chỉ hiện trên mobile/tablet --}}
             <a href="{{ Auth::check() ? url('/gio-hang') : url('/dang-nhap') }}"
-                class="d-lg-none cart-badge" style="color:#d4af37; font-size:1.35rem; position:relative;">
+                class="d-lg-none cart-badge order-lg-3" style="color:#d4af37; font-size:1.3rem; position:relative; margin-left:auto; margin-right:10px;">
                 <i class="bi bi-cart3"></i>
                 @if(Auth::check())
                 @php $soLuongGioHang = collect(session('gio_hang_' . Auth::id(), []))->sum('so_luong'); @endphp
@@ -606,8 +559,14 @@
                 @endif
             </a>
 
-            {{-- NAV DESKTOP (ẩn trên mobile) --}}
-            <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
+            {{-- Nút menu 1 nút bấm để mở/thu (chỉ mobile/tablet) --}}
+            <button class="navbar-toggler border-0 d-lg-none" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav">
+                <i class="bi bi-list navbar-toggler-icon-custom"></i>
+            </button>
+
+            {{-- MENU: desktop hiện ngang cố định, mobile là dropdown ẩn/hiện dưới navbar --}}
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="{{ url('/') }}" class="nav-link nav-link-main">
@@ -661,8 +620,9 @@
                     </a>
                     @endif
 
+                    {{-- Nút giỏ hàng dạng chữ - chỉ hiện desktop, mobile đã có icon riêng ở trên --}}
                     @if(Auth::check())
-                    <a href="{{ url('/gio-hang') }}" class="btn-action-gold cart-badge">
+                    <a href="{{ url('/gio-hang') }}" class="btn-action-gold cart-badge d-none d-lg-inline-flex">
                         <i class="bi bi-cart3"></i> Giỏ hàng
                         @if($soLuongGioHang > 0)
                         <span class="badge">{{ $soLuongGioHang }}</span>
@@ -673,83 +633,6 @@
             </div>
         </div>
     </nav>
-
-    {{-- OFFCANVAS MENU (MOBILE) --}}
-    <div class="offcanvas offcanvas-start mobile-menu" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-        <div class="offcanvas-header">
-            <a href="{{ url('/') }}" class="navbar-brand mb-0" id="mobileMenuLabel" style="font-size:1.3rem;">
-                <i class="bi bi-gem"></i> KINGSMAN
-            </a>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
-                style="filter:invert(1);"></button>
-        </div>
-
-        <div class="offcanvas-body">
-
-            {{-- Thông tin người dùng --}}
-            @if(Auth::check())
-            <div class="mobile-user-box">
-                <span class="user-info-avatar" style="width:38px;height:38px;font-size:1rem;">
-                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                </span>
-                <div>
-                    <strong>{{ Auth::user()->name }}</strong>
-                    @if(Auth::user()->quyen == 'Admin')
-                    <div style="font-size:0.72rem;color:#888;">Quản trị viên</div>
-                    @endif
-                </div>
-            </div>
-            @endif
-
-            {{-- Menu chính --}}
-            <ul class="mobile-nav-list">
-                <li>
-                    <a href="{{ url('/') }}"><i class="bi bi-house-door"></i> Trang chủ</a>
-                </li>
-                <li>
-                    <a href="{{ url('/san-pham') }}"><i class="bi bi-grid"></i> Sản phẩm</a>
-                </li>
-                @if(Auth::check())
-                <li>
-                    <a href="{{ url('/gio-hang') }}"><i class="bi bi-cart3"></i> Giỏ hàng
-                        @if($soLuongGioHang > 0)
-                        <span class="mobile-badge">{{ $soLuongGioHang }}</span>
-                        @endif
-                    </a>
-                </li>
-                @endif
-
-                @if(Auth::check() && Auth::user()->quyen == 'Admin')
-                <li class="mobile-nav-divider">Quản trị</li>
-                <li>
-                    <a href="{{ url('/san-pham/danh-sach') }}"><i class="bi bi-box-seam"></i> Quản Lý Sản Phẩm</a>
-                </li>
-                <li>
-                    <a href="{{ url('/nguoi-dung') }}"><i class="bi bi-person-lines-fill"></i> Danh Sách Tài Khoản</a>
-                </li>
-                <li>
-                    <a href="{{ url('/thong-ke/doanh-thu') }}"><i class="bi bi-bar-chart"></i> Thống kê doanh thu</a>
-                </li>
-                <li>
-                    <a href="{{ url('/thong-ke/don-hang') }}"><i class="bi bi-receipt-cutoff"></i> Thống kê đơn hàng</a>
-                </li>
-                @endif
-            </ul>
-
-            {{-- Đăng nhập / Đăng xuất --}}
-            <div class="mobile-menu-footer">
-                @if(Auth::check())
-                <a href="{{ url('/dang-xuat') }}" class="btn-action-gold w-100 justify-content-center">
-                    <i class="bi bi-box-arrow-right"></i> Đăng xuất
-                </a>
-                @else
-                <a href="{{ url('/dang-nhap') }}" class="btn-action-gold w-100 justify-content-center">
-                    <i class="bi bi-person"></i> Đăng nhập
-                </a>
-                @endif
-            </div>
-        </div>
-    </div>
 
     {{-- BODY --}}
     <div class="container-fluid main-content">
