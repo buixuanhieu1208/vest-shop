@@ -78,4 +78,32 @@ class NguoiDungController extends Controller
 
         return back()->with('success', 'Đã cập nhật tên tài khoản thành công!');
     }
+    public function doiAvatar(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        if ($request->hasFile('avatar')) {
+            $thuMucLuu = public_path('images/avatars');
+            if (!file_exists($thuMucLuu)) {
+                mkdir($thuMucLuu, 0777, true);
+            }
+
+            $file = $request->file('avatar');
+            $tenFile = time() . '_' . uniqid() . '.' . $file->extension();
+            $file->move($thuMucLuu, $tenFile);
+
+            if ($user->avatar && file_exists(public_path('images/avatars/' . $user->avatar))) {
+                @unlink(public_path('images/avatars/' . $user->avatar));
+            }
+
+            $user->avatar = $tenFile;
+            $user->save();
+        }
+
+        return back()->with('success', 'Đổi ảnh đại diện thành công!');
+    }
 }

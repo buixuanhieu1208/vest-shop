@@ -72,4 +72,6 @@ Route::middleware('auth')->group(function () {
         Auth::logout();
         return redirect('/dang-nhap');
     });
+
+    Route::post('/tai-khoan/doi-avatar', [App\Http\Controllers\NguoiDungController::class, 'doiAvatar'])->name('taikhoan.doiavatar');
 });
