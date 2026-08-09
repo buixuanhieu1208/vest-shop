@@ -24,6 +24,36 @@
         height: 100%;
     }
 
+    /* Biến carousel-inner thành 1 track flex kéo tự do bằng chuột/ngón tay,
+       bỏ cơ chế ẩn/hiện position:absolute mặc định của Bootstrap */
+    .hero-carousel .carousel-inner {
+        display: flex;
+        transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+        will-change: transform;
+        cursor: grab;
+        touch-action: pan-y;
+        user-select: none;
+    }
+
+    .hero-carousel .carousel-inner.is-dragging {
+        transition: none;
+        cursor: grabbing;
+    }
+
+    .hero-carousel .carousel-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        display: block !important;
+        position: static !important;
+        opacity: 1 !important;
+        transform: none !important;
+        float: none !important;
+    }
+
+    .hero-carousel .carousel-item img {
+        pointer-events: none; /* ảnh nền không chặn thao tác kéo, nhưng nút/link vẫn bấm được */
+    }
+
     .carousel-slide {
         height: 100%;
         display: flex;
@@ -629,30 +659,145 @@
 
 @section('scripts')
 <script>
-    // Watchdog: nếu carousel bị kẹt giữa 2 slide (do transition không hoàn tất),
-    // tự động dọn class thừa sau 1 giây để tránh đứng hình.
+    // ===== HERO CAROUSEL: kéo tự do bằng chuột hoặc ngón tay (Pointer Events) =====
     document.addEventListener('DOMContentLoaded', function () {
-        var carouselEl = document.getElementById('heroCarousel');
-        if (!carouselEl) return;
+        const wrap = document.querySelector('.hero-carousel');
+        const track = document.getElementById('heroCarousel')?.querySelector('.carousel-inner');
+        if (!wrap || !track) return;
 
-        carouselEl.addEventListener('slide.bs.carousel', function () {
-            clearTimeout(carouselEl._watchdogTimer);
-            carouselEl._watchdogTimer = setTimeout(function () {
-                var items = carouselEl.querySelectorAll('.carousel-item');
-                var stuck = carouselEl.querySelectorAll(
-                    '.carousel-item-start, .carousel-item-end, .carousel-item-next, .carousel-item-prev'
-                );
-                if (stuck.length > 0) {
-                    // Bị kẹt: giữ lại đúng 1 item active, xóa hết class chuyển tiếp còn sót
-                    items.forEach(function (item) {
-                        item.classList.remove(
-                            'carousel-item-start', 'carousel-item-end',
-                            'carousel-item-next', 'carousel-item-prev'
-                        );
-                    });
-                }
-            }, 1000);
+        const slides = Array.from(track.children);
+        const total = slides.length;
+        const indicators = Array.from(wrap.querySelectorAll('.carousel-indicators button'));
+        const btnPrev = wrap.querySelector('.carousel-control-prev');
+        const btnNext = wrap.querySelector('.carousel-control-next');
+
+        let currentIndex = Math.max(0, slides.findIndex(s => s.classList.contains('active')));
+        let isDragging = false;
+        let startX = 0;
+        let deltaX = 0;
+        let containerWidth = wrap.getBoundingClientRect().width;
+        let autoplayTimer = null;
+        const AUTOPLAY_MS = 4000;
+        const DRAG_THRESHOLD_RATIO = 0.15; // kéo quá 15% bề rộng thì mới chuyển slide
+        const EDGE_RESISTANCE = 0.35; // lực cản khi kéo ở slide đầu/cuối
+
+        function render(animate = true) {
+            track.style.transition = animate
+                ? 'transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1)'
+                : 'none';
+            track.style.transform = `translateX(${-currentIndex * containerWidth}px)`;
+
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentIndex));
+            indicators.forEach((b, i) => {
+                b.classList.toggle('active', i === currentIndex);
+                b.setAttribute('aria-current', i === currentIndex ? 'true' : 'false');
+            });
+        }
+
+        function goTo(index) {
+            currentIndex = Math.min(Math.max(index, 0), total - 1);
+            render(true);
+        }
+
+        function stopAutoplay() {
+            clearInterval(autoplayTimer);
+        }
+
+        function startAutoplay() {
+            stopAutoplay();
+            autoplayTimer = setInterval(() => {
+                currentIndex = (currentIndex + 1) % total; // autoplay thì lặp vòng
+                render(true);
+            }, AUTOPLAY_MS);
+        }
+
+        // ===== ĐIỀU HƯỚNG BẰNG NÚT / CHẤM TRÒN =====
+        btnPrev?.addEventListener('click', (e) => { e.preventDefault(); goTo(currentIndex - 1); startAutoplay(); });
+        btnNext?.addEventListener('click', (e) => { e.preventDefault(); goTo(currentIndex + 1); startAutoplay(); });
+        indicators.forEach((btn, i) => {
+            btn.addEventListener('click', () => { goTo(i); startAutoplay(); });
         });
+
+        // ===== KÉO TỰ DO BẰNG CHUỘT / NGÓN TAY =====
+        let draggedFar = false; // để phân biệt click vs kéo (tránh bấm nhầm nút CTA khi vừa kéo xong)
+
+        track.addEventListener('pointerdown', (e) => {
+            // chỉ chuột trái (nếu là chuột)
+            if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+            isDragging = true;
+            draggedFar = false;
+            startX = e.clientX;
+            deltaX = 0;
+            containerWidth = wrap.getBoundingClientRect().width;
+            track.classList.add('is-dragging');
+            stopAutoplay();
+            track.setPointerCapture(e.pointerId);
+        });
+
+        track.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            deltaX = e.clientX - startX;
+
+            if (Math.abs(deltaX) > 6) draggedFar = true;
+
+            // lực cản khi đang ở slide đầu mà kéo sang phải, hoặc slide cuối mà kéo sang trái
+            let applied = deltaX;
+            if ((currentIndex === 0 && deltaX > 0) || (currentIndex === total - 1 && deltaX < 0)) {
+                applied = deltaX * EDGE_RESISTANCE;
+            }
+
+            const base = -currentIndex * containerWidth;
+            track.style.transform = `translateX(${base + applied}px)`;
+        });
+
+        function endDrag(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            track.classList.remove('is-dragging');
+
+            const threshold = containerWidth * DRAG_THRESHOLD_RATIO;
+
+            if (deltaX <= -threshold) {
+                goTo(currentIndex + 1); // kéo sang trái -> slide kế tiếp
+            } else if (deltaX >= threshold) {
+                goTo(currentIndex - 1); // kéo sang phải -> slide trước
+            } else {
+                render(true); // kéo chưa đủ xa -> bật lại vị trí cũ
+            }
+
+            deltaX = 0;
+            startAutoplay();
+        }
+
+        track.addEventListener('pointerup', endDrag);
+        track.addEventListener('pointercancel', endDrag);
+        track.addEventListener('pointerleave', (e) => {
+            // chỉ huỷ kéo khi rời hẳn khỏi track trong lúc đang giữ chuột (không áp dụng khi dùng cảm ứng)
+            if (isDragging && e.pointerType === 'mouse') endDrag(e);
+        });
+
+        // Chặn click vào link/nút bên trong slide nếu vừa mới kéo (tránh bấm nhầm)
+        track.addEventListener('click', (e) => {
+            if (draggedFar) {
+                e.preventDefault();
+                e.stopPropagation();
+                draggedFar = false;
+            }
+        }, true);
+
+        // Dừng tự động chạy khi rê chuột vào carousel, chạy lại khi rời ra
+        wrap.addEventListener('mouseenter', stopAutoplay);
+        wrap.addEventListener('mouseleave', () => { if (!isDragging) startAutoplay(); });
+
+        // Cập nhật lại bề rộng khi resize màn hình (xoay ngang điện thoại, đổi cỡ cửa sổ...)
+        window.addEventListener('resize', () => {
+            containerWidth = wrap.getBoundingClientRect().width;
+            render(false);
+        });
+
+        render(false);
+        startAutoplay();
     });
 </script>
 @endsection

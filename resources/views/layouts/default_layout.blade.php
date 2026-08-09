@@ -697,18 +697,6 @@
                 link.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
             }
         });
-
-        // Carousel
-        document.addEventListener('DOMContentLoaded', function() {
-            var el = document.querySelector('#heroCarousel');
-            if (el && typeof bootstrap !== 'undefined') {
-                new bootstrap.Carousel(el, {
-                    interval: 4000,
-                    ride: 'carousel',
-                    touch: true
-                });
-            }
-        });
     </script>
 
     @yield('scripts')
