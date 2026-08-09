@@ -497,28 +497,28 @@
     }
 </style>
 
-{{-- HERO CAROUSEL --}}
-<div class="hero-carousel">
-    <style>
-        /* Kéo carousel tràn full-width thay vì dùng margin âm, tránh làm lệch layout khi transform trượt */
-        .hero-carousel {
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-        }
-    </style>
-    <div id="heroCarousel" class="carousel slide">
+    {{-- HERO CAROUSEL --}}
+    <div class="hero-carousel">
+        <style>
+            /* Kéo carousel tràn full-width thay vì dùng margin âm, tránh làm lệch layout khi transform trượt */
+            .hero-carousel {
+                width: 100vw;
+                position: relative;
+                left: 50%;
+                right: 50%;
+                margin-left: -50vw;
+                margin-right: -50vw;
+            }
+        </style>
+        <div id="heroCarousel" class="carousel slide">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+            <button type="button" class="active"></button>
+            <button type="button"></button>
+            <button type="button"></button>
+            <button type="button"></button>
         </div>
         <div class="carousel-inner" style="height:100%;">
-            <div class="carousel-item active" style="height:100%;" data-bs-interval="4000">
+            <div class="carousel-item active" style="height:100%;">
                 <div class="carousel-slide" style="background: linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=1600') center/cover;">
                     <div class="carousel-content">
                         <div class="carousel-badge">🎉 SALE UP TO 50%</div>
@@ -528,7 +528,7 @@
                     </div>
                 </div>
             </div>
-            <div class="carousel-item" style="height:100%;" data-bs-interval="4000">
+            <div class="carousel-item" style="height:100%;">
                 <div class="carousel-slide" style="background: linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=1600') center/cover;">
                     <div class="carousel-content">
                         <div class="carousel-badge">✨ NEW ARRIVAL</div>
@@ -538,7 +538,7 @@
                     </div>
                 </div>
             </div>
-            <div class="carousel-item" style="height:100%;" data-bs-interval="4000">
+            <div class="carousel-item" style="height:100%;">
                 <div class="carousel-slide" style="background: linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1600') center/cover;">
                     <div class="carousel-content">
                         <div class="carousel-badge">💼 VIP SERVICE</div>
@@ -548,7 +548,7 @@
                     </div>
                 </div>
             </div>
-            <div class="carousel-item" style="height:100%;" data-bs-interval="4000">
+            <div class="carousel-item" style="height:100%;">
                 <div class="carousel-slide" style="background: linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=1600') center/cover;">
                     <div class="carousel-content">
                         <div class="carousel-badge">🎁 GIFT VOUCHER</div>
@@ -559,10 +559,10 @@
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button">
             <i class="bi bi-chevron-left" style="font-size:1.5rem;color:#fff;"></i>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <button class="carousel-control-next" type="button">
             <i class="bi bi-chevron-right" style="font-size:1.5rem;color:#fff;"></i>
         </button>
     </div>
