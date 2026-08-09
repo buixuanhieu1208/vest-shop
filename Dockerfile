@@ -23,6 +23,7 @@ RUN composer install --no-dev --optimize-autoloader
 RUN mkdir -p /var/www/html/public/images/reviews
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public/images
 
+
 # Cho Apache trỏ vào thư mục public của Laravel
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
@@ -40,3 +41,4 @@ RUN echo '#!/bin/bash\nphp artisan migrate --force\napache2-foreground' > /usr/l
     && chmod +x /usr/local/bin/start.sh
 
 CMD ["/usr/local/bin/start.sh"]
+CMD php artisan config:clear && php artisan cache:clear && php artisan migrate --force && apache2-foreground
