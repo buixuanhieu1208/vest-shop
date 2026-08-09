@@ -41,9 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/thanh-toan', [App\Http\Controllers\GioHangController::class, 'xuLyThanhToan'])->name('giohang.xulythanhtoan');
 
     // Trang cá nhân (Profile)
-    Route::get('/trang-ca-nhan', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
-    Route::post('/trang-ca-nhan/avatar', [App\Http\Controllers\ProfileController::class, 'avatar'])->name('profile.avatar');
-    Route::post('/trang-ca-nhan/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/trang-ca-nhan', [App\Http\Controllers\NguoiDungController::class, 'showProfile'])->name('profile.show');
+    Route::post('/trang-ca-nhan/avatar', [App\Http\Controllers\NguoiDungController::class, 'doiAvatar'])->name('profile.avatar');
+    Route::post('/trang-ca-nhan/update', [App\Http\Controllers\NguoiDungController::class, 'updateProfile'])->name('profile.update');
 
     // Đánh giá sản phẩm
     Route::post('/san-pham/{id}/danh-gia', [DanhGiaController::class, 'store'])->name('danhgia.store');

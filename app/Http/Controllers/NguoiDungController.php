@@ -106,4 +106,26 @@ class NguoiDungController extends Controller
 
         return back()->with('success', 'Đổi ảnh đại diện thành công!');
     }
+    public function showProfile()
+    {
+        $user = Auth::user();
+        return view('Profile', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+        ]);
+
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->save();
+
+        return back()->with('success', 'Cập nhật thông tin thành công!');
+    }
 }
