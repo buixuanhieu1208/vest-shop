@@ -20,6 +20,8 @@ COPY . .
 # Cài package PHP (bỏ qua dev dependencies để nhẹ hơn)
 RUN composer install --no-dev --optimize-autoloader
 
+RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
+
 # Cho Apache trỏ vào thư mục public của Laravel
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
