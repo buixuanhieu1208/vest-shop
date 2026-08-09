@@ -26,7 +26,7 @@ Kingsman Shop Vest là website bán vest/suit cao cấp theo phong cách sang tr
 - Quản lý đơn hàng (cập nhật trạng thái: chờ xử lý, đang giao, hoàn thành, đã hủy)
 - Thống kê doanh thu, sản phẩm bán chạy, đơn hàng theo trạng thái
 
-## 🛠 Công nghệ sử dụng
+## Công nghệ sử dụng
 
 **Back-end:**
 - PHP 8.3, Laravel Framework
