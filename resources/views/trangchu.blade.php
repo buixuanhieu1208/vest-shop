@@ -707,7 +707,13 @@
         }
 
         function goTo(index) {
-            currentIndex = Math.min(Math.max(index, 0), total - 1);
+            if (index >= total) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = total - 1;
+            } else {
+                currentIndex = index;
+            }
             render(true);
         }
 
