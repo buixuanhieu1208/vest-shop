@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     // Đánh giá sản phẩm
     Route::post('/san-pham/{id}/danh-gia', [DanhGiaController::class, 'store'])->name('danhgia.store');
     Route::post('/danh-gia/{id}/xoa', [DanhGiaController::class, 'destroy'])->name('danhgia.xoa');
+    Route::delete('/danh-gia/{id}', [App\Http\Controllers\DanhGiaController::class, 'destroy'])->name('danhgia.destroy');
 
     // CRUD Sản phẩm
     Route::post('/san-pham/them', [SanPhamController::class, 'luuThem'])->name('sanpham.luuthem');
