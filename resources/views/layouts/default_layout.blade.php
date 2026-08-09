@@ -558,6 +558,27 @@
         a, a:hover {
             text-decoration: none !important;
         }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden !important;
+            position: relative;
+        }
+
+        body {
+            background-color: #000;
+            color: #f0f0f0;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 
