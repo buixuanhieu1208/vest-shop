@@ -302,7 +302,7 @@
         @media (max-width: 991.98px) {
             #navbarNav {
                 position: absolute;
-                top: 100%; 
+                top: 100%;
                 left: 0;
                 right: 0;
                 background: #111;
@@ -314,10 +314,8 @@
                 z-index: 1050;
             }
 
-            .navbar-nav {
-                width: 100%;
-            }
-
+            .navbar-nav { width: 100%; }
+            
             .navbar-nav .nav-item {
                 width: 100%;
                 border-bottom: 1px solid #222;
@@ -326,8 +324,52 @@
             .nav-link-main {
                 width: 100%;
                 border-radius: 0 !important;
-                padding: 12px 4px !important;
+                padding: 12px 15px !important; 
                 justify-content: flex-start;
+            }
+
+            .dropdown-hover::after {
+                display: none;
+            }
+
+            .dropdown-hover .dropdown-menu {
+                position: static;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: none;
+                box-shadow: none;
+                
+                margin: 4px 0 10px 30px; 
+                border: none;
+                border-left: 2px solid #d4af37; 
+                border-radius: 0;
+                background: transparent;
+                padding-left: 5px;
+            }
+
+            .dropdown-menu.show {
+                display: block; 
+            }
+
+            .dropdown-item {
+                padding: 8px 15px;
+                color: #c0c0c0;
+                white-space: normal;
+            }
+            
+            .dropdown-item::before {
+                content: "•"; 
+                color: #d4af37;
+                font-size: 1.5rem;
+                line-height: 0;
+                vertical-align: -3px;
+                margin-right: 8px;
+            }
+
+            .dropdown-item i {
+                display: none;
             }
 
             .navbar-actions {
@@ -338,14 +380,8 @@
                 padding-top: 12px;
             }
 
-            .navbar-actions .user-info {
-                justify-content: center;
-            }
-
-            .navbar-actions .btn-action-gold {
-                justify-content: center;
-                width: 100%;
-            }
+            .navbar-actions .user-info { justify-content: center; }
+            .navbar-actions .btn-action-gold { justify-content: center; width: 100%; }
         }
 
         @media (max-width: 576px) {
