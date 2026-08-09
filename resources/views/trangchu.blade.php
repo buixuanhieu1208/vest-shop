@@ -43,6 +43,7 @@
     .hero-carousel .carousel-item {
         flex: 0 0 100%;
         max-width: 100%;
+        margin-right: 0 !important;
         display: block !important;
         position: static !important;
         opacity: 1 !important;

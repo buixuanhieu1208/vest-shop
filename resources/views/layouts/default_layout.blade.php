@@ -65,15 +65,19 @@
             gap: 18px;
         }
 
-        /* Khối chứa nav + actions (Bootstrap collapse) luôn cùng hàng với logo */
-        #navbarNav {
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: center;
-            justify-content: space-between;
-            flex: 1 1 auto;
-            min-width: 0;
-            gap: 14px;
+        /* Khối chứa nav + actions (Bootstrap collapse) luôn cùng hàng với logo — CHỈ áp dụng desktop.
+           (dùng #id nên độ ưu tiên rất cao, nếu để chung mọi màn hình sẽ đè mất cơ chế ẩn/hiện
+           của Bootstrap trên mobile khiến menu bị lộ nửa vời) */
+        @media (min-width: 992px) {
+            #navbarNav {
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+                justify-content: space-between;
+                flex: 1 1 auto;
+                min-width: 0;
+                gap: 14px;
+            }
         }
 
         .navbar-brand {
@@ -100,13 +104,15 @@
             text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
 
-        .navbar-nav {
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: center;
-            gap: 2px;
-            flex-shrink: 1;
-            min-width: 0;
+        @media (min-width: 992px) {
+            .navbar-nav {
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+                gap: 2px;
+                flex-shrink: 1;
+                min-width: 0;
+            }
         }
 
         .nav-link-main {
