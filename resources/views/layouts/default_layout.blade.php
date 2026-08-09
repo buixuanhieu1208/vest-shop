@@ -335,19 +335,21 @@
             }
 
             .dropdown-hover .dropdown-menu {
-                position: static;
+                position: static !important;
                 display: none;
                 opacity: 1;
                 visibility: visible;
                 pointer-events: auto;
-                transform: none;
+                transform: none !important;
+                inset: auto !important;
                 box-shadow: none;
-                margin: 4px 0 10px 40px;
+                margin: 4px 0 10px 40px !important;
                 border: none;
                 border-left: 2px solid #d4af37;
                 border-radius: 0;
                 background: transparent;
                 padding-left: 10px;
+                width: auto;
             }
 
             .dropdown-menu.show {
