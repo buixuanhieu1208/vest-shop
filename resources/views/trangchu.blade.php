@@ -97,7 +97,7 @@
     }
 
     .carousel-title {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Lora', serif;
         font-size: 3rem;
         font-weight: 700;
         color: #fff;
@@ -186,7 +186,7 @@
         font-size: 10rem;
         font-weight: 900;
         color: rgba(212, 175, 55, 0.03);
-        font-family: 'Playfair Display', serif;
+        font-family: 'Lora', serif;
         pointer-events: none;
     }
 
@@ -196,7 +196,7 @@
     }
 
     .section-title {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Lora', serif;
         font-size: 2.8rem;
         font-weight: 700;
         color: #d4af37;
@@ -263,11 +263,11 @@
         font-size: 8rem;
         color: #d4af37;
         opacity: 0.3;
-        font-family: 'Playfair Display', serif;
+        font-family: 'Lora', serif;
     }
 
     .about-description h3 {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Lora', serif;
         color: #d4af37;
         font-size: 1.8rem;
         margin-bottom: 20px;
@@ -335,7 +335,7 @@
     }
 
     .stat-number {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Lora', serif;
         font-size: 2.8rem;
         font-weight: 700;
         color: #d4af37;
@@ -431,7 +431,7 @@
         color: #d4af37;
         font-size: 1.2rem;
         font-weight: 700;
-        font-family: 'Playfair Display', serif;
+        font-family: 'Lora', serif;
         margin-bottom: 15px;
     }
 

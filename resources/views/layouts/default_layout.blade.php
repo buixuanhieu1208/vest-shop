@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@yield('title', 'Kingsman Vietnam')</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
     
@@ -20,7 +20,7 @@
         body {
             background-color: #000;
             color: #f0f0f0;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Be Vietnam Pro', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -81,7 +81,7 @@
         }
 
         .navbar-brand {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Lora', serif;
             font-size: 1.45rem;
             color: #d4af37 !important;
             letter-spacing: 1.8px;
@@ -423,7 +423,7 @@
         .side-heading {
             background: linear-gradient(135deg, #d4af37, #c19b2f) !important;
             color: #000 !important;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Lora', serif;
             font-weight: 700 !important;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -470,7 +470,7 @@
         }
 
         footer h5 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Lora', serif;
             letter-spacing: 2px;
             margin-bottom: 20px;
             color: #d4af37;
