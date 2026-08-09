@@ -190,20 +190,21 @@
     .btn-detail {
         flex: 1;
         background: transparent;
-        border: 2px solid #d4af37;
+        border: 1.5px solid #d4af37;
         color: #d4af37;
-        padding: 10px 15px;
-        border-radius: 8px;
+        padding: 7px 12px;
+        border-radius: 7px;
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s;
         text-align: center;
-        font-size: 0.85rem;
-        letter-spacing: 1px;
+        font-size: 0.78rem;
+        letter-spacing: 0.5px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 5px;
+        height: 34px;
     }
 
     .btn-detail:hover {
@@ -254,10 +255,10 @@
         background-position: right 12px center;
         border: 1.5px solid #3a3a3a;
         color: #ccc;
-        border-radius: 8px;
-        padding: 0 28px 0 14px;
-        height: 40px;
-        font-size: 0.82rem;
+        border-radius: 7px;
+        padding: 0 26px 0 12px;
+        height: 34px;
+        font-size: 0.76rem;
         font-weight: 500;
         cursor: pointer;
         outline: none;
@@ -292,15 +293,15 @@
         background: linear-gradient(135deg, #d4af37, #c19b2f);
         border: none;
         color: #000;
-        height: 40px;
-        padding: 0 12px;
-        border-radius: 8px;
+        height: 34px;
+        padding: 0 10px;
+        border-radius: 7px;
         font-weight: 600;
-        font-size: 0.85rem;
+        font-size: 0.76rem;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 5px;
         cursor: pointer;
         transition: all 0.25s ease;
     }
