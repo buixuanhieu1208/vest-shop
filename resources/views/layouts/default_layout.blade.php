@@ -665,28 +665,14 @@
 
                 <div class="d-flex align-items-center gap-2 navbar-actions">
                     @if(Auth::check())
-                    <div class="dropdown dropdown-hover">
-                        <a href="#" class="user-info dropdown-toggle text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
-                            @if(Auth::user()->avatar)
-                                <img src="{{ asset('images/avatars/' . Auth::user()->avatar) }}" class="user-info-avatar" style="object-fit: cover;">
-                            @else
-                                <span class="user-info-avatar">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
-                            @endif
-                            <strong>{{ Auth::user()->name }}</strong>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" style="right: 0; left: auto;">
-                            <li><a class="dropdown-item" href="{{ url('/trang-ca-nhan') }}"><i class="bi bi-person-circle"></i> Trang cá nhân</a></li>
-                            <li><hr class="dropdown-divider" style="border-color: #333 !important; margin: 4px 0;"></li>
-                            <li>
-                                <form action="{{ url('/dang-xuat') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item text-danger" style="background: none; border: none; width: 100%; text-align: left;">
-                                        <i class="bi bi-box-arrow-right"></i> Đăng xuất
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
+                    <a href="{{ url('/trang-ca-nhan') }}" class="user-info text-decoration-none" style="display: inline-flex; align-items: center; gap: 8px; color: #c0c0c0; font-size: 0.78rem; padding: 4px 12px 4px 4px; background: rgba(42, 42, 42, 0.5); border-radius: 20px; border: 1px solid #333; transition: all 0.25s;" onmouseover="this.style.borderColor='#d4af37'" onmouseout="this.style.borderColor='#333'">
+                        @if(Auth::user()->avatar)
+                            <img src="{{ asset('images/avatars/' . Auth::user()->avatar) }}" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
+                        @else
+                            <span class="user-info-avatar">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                        @endif
+                        <strong style="color: #d4af37;">{{ Auth::user()->name }}</strong>
+                    </a>
                     <a href="{{ url('/dang-xuat') }}" class="btn-action-gold">
                         <i class="bi bi-box-arrow-right"></i> Đăng xuất
                     </a>
