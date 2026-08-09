@@ -288,7 +288,6 @@
             <div class="review-content">{{ $dg->noi_dung }}</div>
             @endif
 
-            {{-- HIỂN THỊ ẢNH ĐÍNH KÈM NẾU CÓ --}}
             @if(!empty($dg->hinh_anh) && is_array($dg->hinh_anh))
             <div class="review-attached-images">
                 @foreach($dg->hinh_anh as $img)
