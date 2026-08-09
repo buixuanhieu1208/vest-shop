@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/gio-hang/update', [GioHangController::class, 'updateSL'])->name('giohang.update');
     Route::get('/gio-hang/xoa', [GioHangController::class, 'remove'])->name('giohang.remove');
     Route::get('/gio-hang/checkout', [GioHangController::class, 'checkout'])->name('giohang.checkout');
+    Route::get('/gio-hang/clear', [App\Http\Controllers\GioHangController::class, 'clear'])->name('giohang.clear');
 
     Route::get('/thanh-toan', [App\Http\Controllers\GioHangController::class, 'thanhToan'])->name('giohang.thanhtoan');
     Route::post('/thanh-toan', [App\Http\Controllers\GioHangController::class, 'xuLyThanhToan'])->name('giohang.xulythanhtoan');

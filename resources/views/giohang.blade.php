@@ -396,23 +396,24 @@
 
     @media (max-width: 768px) {
         .cart-item-card {
-            position: relative;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 80px 1fr auto auto;
+            gap: 12px 10px;
             padding: 15px;
-            gap: 12px;
-            align-items: flex-start;
+            align-items: center;
         }
 
         .cart-item-img {
-            width: 75px;
-            height: 75px;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            width: 80px;
+            height: 80px;
             display: block !important;
         }
 
         .cart-item-info {
-            flex: 1;
-            min-width: 0;
-            padding-right: 35px;
+            grid-column: 2 / 5; 
+            grid-row: 1 / 2;
         }
 
         .cart-item-name {
@@ -422,34 +423,31 @@
         }
 
         .qty-control {
-            margin-top: 5px;
+            grid-column: 1 / 3;
+            grid-row: 2 / 3;
+            justify-self: center; 
+            margin-left: 20px;
         }
 
         .subtotal-col {
+            grid-column: 3 / 4;
+            grid-row: 2 / 3;
             text-align: right;
-            margin-left: auto;
-            margin-top: 5px;
         }
 
         .remove-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 32px;
-            height: 32px;
-            border: none;
+            grid-column: 4 / 5;
+            grid-row: 2 / 3;
+            position: static;
+            width: 34px;
+            height: 34px;
             background: rgba(255, 68, 68, 0.1);
             color: #ff4444;
+            border: none;
         }
 
-        .cart-title {
-            font-size: 1.5rem;
-        }
-        
-        .summary-card {
-            position: static;
-            margin-top: 15px;
-        }
+        .cart-title { font-size: 1.5rem; }
+        .summary-card { position: static; margin-top: 15px; }
     }
 
 </style>
@@ -523,9 +521,14 @@
                 @endforeach
             </div>
 
-            <div class="cart-continue">
+            <div class="cart-continue" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
                 <a href="{{ route('sanpham.index') }}" class="btn-continue">
                     <i class="bi bi-arrow-left"></i> Tiếp tục mua sắm
+                </a>
+                
+                {{-- Nút xóa cả giỏ hàng --}}
+                <a href="{{ route('giohang.clear') }}" class="btn-continue" style="border-color: #ff4444; color: #ff4444;" onclick="return confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng không?')">
+                    <i class="bi bi-trash3"></i> Xóa toàn bộ giỏ
                 </a>
             </div>
         </div>

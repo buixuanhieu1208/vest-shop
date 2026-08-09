@@ -79,6 +79,12 @@ class GioHangController extends Controller
         return redirect()->route('giohang.index');
     }
 
+    public function clear()
+    {
+        session()->forget($this->sessionKey());
+        return redirect()->route('giohang.index')->with('success', 'Đã xóa toàn bộ giỏ hàng!');
+    }
+
     public function checkout()
     {
         session()->forget($this->sessionKey());
