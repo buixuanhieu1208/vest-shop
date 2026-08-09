@@ -655,21 +655,38 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-4 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <h5><i class="bi bi-gem"></i> KINGSMAN</h5>
                     <p>Đẳng cấp quý ông. Mang đến những bộ vest sang trọng, lịch lãm và hoàn hảo cho mọi sự kiện.</p>
                 </div>
-                <div class="col-md-4 mb-4">
+                
+                <div class="col-lg-2 col-md-6 mb-4">
                     <h5>LIÊN KẾT</h5>
                     <a href="{{ url('/') }}">Trang chủ</a>
                     <a href="{{ url('/san-pham') }}">Bộ sưu tập</a>
                     <a href="{{ url('/gio-hang') }}">Giỏ hàng</a>
                 </div>
-                <div class="col-md-4 mb-4">
+                
+                <div class="col-lg-3 col-md-6 mb-4">
                     <h5>LIÊN HỆ</h5>
                     <p><i class="bi bi-geo-alt-fill" style="color:#d4af37;"></i> 123 Đồng Khởi, Quận 1, TP.HCM</p>
                     <p><i class="bi bi-telephone-fill" style="color:#d4af37;"></i> 0901 234 567</p>
                     <p><i class="bi bi-envelope-fill" style="color:#d4af37;"></i> vip@kingsman.vn</p>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>VỊ TRÍ</h5>
+                    <div style="border: 1px solid #333; border-radius: 8px; overflow: hidden; opacity: 0.9; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=123%20Đồng%20Khởi,%20Quận%201,%20TP.HCM&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="160" 
+                            style="border:0; display: block;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
                 </div>
             </div>
             <hr>

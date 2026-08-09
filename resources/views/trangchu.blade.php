@@ -805,23 +805,4 @@
     });
 </script>
 
-{{-- VỊ TRÍ BẢN ĐỒ --}}
-<section style="padding: 60px 0; background: linear-gradient(to bottom, #111, #000);">
-    <div class="container">
-        <h2 class="section-title"><i class="bi bi-geo-alt-fill"></i> Vị Trí Cửa Hàng</h2>
-        <p class="section-subtitle">Kingsman Vietnam - 123 Đồng Khởi, Quận 1, TP.HCM</p>
-
-        <div style="border: 2px solid #d4af37; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);">
-            <iframe 
-                src="https://maps.google.com/maps?q=123%20Đồng%20Khởi,%20Quận%201,%20TP.HCM&t=&z=16&ie=UTF8&iwloc=&output=embed" 
-                width="100%" 
-                height="450" 
-                style="border:0; display: block;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
-    </div>
-</section>
 @endsection
