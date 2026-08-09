@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/nguoi-dung/{id}/quyen', [NguoiDungController::class, 'doiQuyen'])->name('nguoidung.doiquyen');
     Route::post('/nguoi-dung/{id}/xoa', [NguoiDungController::class, 'xoa'])->name('nguoidung.xoa');
     Route::put('/nguoi-dung/{id}/sua-ten', [App\Http\Controllers\NguoiDungController::class, 'suaTen'])->name('nguoidung.suaten');
+    
 
     // Thống kê (Admin)
     Route::get('/thong-ke/doanh-thu', [ThongKeController::class, 'doanhThu'])->name('thongke.doanhthu');
